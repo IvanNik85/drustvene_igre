@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Društvene igre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/drustveneIgre.css">    
+</head>
+<body>
+    <div class='container'>
+        <div class='imageDiv'>        
+        </div>
+    </div>
+    <div class='containerGames'>
+        <div id='divOne' class='games'>
+            <button class='visible' id="vesala" type="button">Vešala</button>
+        </div>
+        <div id='divTwo' class='games'>
+            <button class='visible' id="skocko" type="button">Skočko</button>
+        </div>
+        <div id='divThree' class='games'>
+            <button class='visible' id="slova" type="button">Slova</button>
+        </div>
+    </div>
+    <div class='generated'>
+    </div>
+    
+    <script> 
+        var vesala = document.getElementById('vesala');
+        var generated = document.querySelector('.generated');
+        var link = document.createElement('a');
+        link.setAttribute('href', 'Igra_vesala.html');
+        var btnOne = document.createElement('button');           
+        btnOne.setAttribute('id', 'easy');           
+        btnOne.innerHTML = 'Lakše';
+        var btnTwo = document.createElement('button');           
+        btnTwo.setAttribute('id', 'hard');
+        btnTwo.innerHTML = 'Teže';
+
+        vesala.addEventListener('mouseover', generate); 
+        vesala.addEventListener('mouseleave', remove);
+
+        function generate() {           
+
+            setTimeout(() => {   
+
+                btnOne.className = '';
+                btnTwo.className = '';
+                generated.appendChild(link);     
+                link.appendChild(btnOne);                           
+                generated.appendChild(btnTwo); 
+
+                btnTwo.addEventListener('click', hard);
+                function hard() {
+                    alert(`U izradi`);
+                } 
+            }, 130);
+        };
+        function remove() {
+            setTimeout(() => {
+                btnOne.className = 'hidden';
+                btnTwo.className = 'hidden';
+            },3000);
+        };
+
+    </script>
+</body>
+</html>
