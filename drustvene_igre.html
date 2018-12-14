@@ -38,24 +38,25 @@
         btnTwo.setAttribute('id', 'hard');
         btnTwo.innerHTML = 'Teže';
 
-        vesala.addEventListener('mouseover', generate); 
+        vesala.addEventListener('mouseenter', generate); 
         vesala.addEventListener('mouseleave', remove);
 
         function generate() {           
 
-            setTimeout(() => {   
+            setTimeout(() => {  
 
                 btnOne.className = '';
                 btnTwo.className = '';
                 generated.appendChild(link);     
                 link.appendChild(btnOne);                           
-                generated.appendChild(btnTwo); 
-
-                btnTwo.addEventListener('click', hard);
-                function hard() {
-                    alert(`U izradi`);
-                } 
+                generated.appendChild(btnTwo);
             }, 130);
+
+            btnTwo.addEventListener('click', hard);
+            function hard() {
+                btnTwo.removeEventListener('click', hard);
+                alert(`U izradi`);
+            } 
         };
         function remove() {
             setTimeout(() => {
