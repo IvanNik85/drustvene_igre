@@ -11,7 +11,7 @@
     font-size: 20px;          
 }
 .inputRemove {
-    height: 800px;           
+    height: 900px;           
     background: url(../images/words1.jpg) no-repeat center;
     background-size: cover;              
 }
@@ -45,8 +45,7 @@
 }
 .right {
     width: 600px;
-    height: 100%;     
-   /* background: url(vesala/1ves.jpg) no-repeat left; */
+    height: 100%;  
     background-size: 155%;                
 }
 img {
