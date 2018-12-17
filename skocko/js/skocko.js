@@ -42,7 +42,7 @@ for(i = 1; i <= 6; i++) {
         insideRow.setAttribute('class', 'two');        
         row.appendChild(insideRow);
         let insideRow1 = document.createElement('div');
-        insideRow1.setAttribute('class', 'true');        
+        insideRow1.setAttribute('class', 'neutral');        
         insideRow.appendChild(insideRow1);
     }
 }
@@ -64,7 +64,7 @@ function resetGame() {
 function vrednost() {      
     document.querySelectorAll('.row .one')[0].className = this.className;
    
-    var row1 = document.querySelectorAll('#row1 div');
+    /*var row1 = document.querySelectorAll('#row1 div');
     console.log(row1[0].className);    
     console.log(finalArr);
 
@@ -73,8 +73,5 @@ function vrednost() {
        console.log(testArr)       
        break;
       ;   
-       
-        }
-        
-    
+    }*/
 }
