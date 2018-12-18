@@ -24,8 +24,7 @@ sixPos.addEventListener('click', vrednost);
 
 for(i = 1; i <= 6; i++) {
     let row = document.createElement('div');
-    row.setAttribute('class', 'row');
-    row.setAttribute('id', 'row' + i);
+    row.setAttribute('class', 'row');   
     divOne.appendChild(row);   
     for(j = 0; j < 4; j++) {  
         let insideRow = document.createElement('div');
@@ -35,26 +34,23 @@ for(i = 1; i <= 6; i++) {
 }
 for(i = 1; i <= 6; i++) {
     let row = document.createElement('div');
-    row.setAttribute('class', 'row');
+    row.setAttribute('class', 'row');    
     divTwo.appendChild(row);   
     for(j = 0; j < 4; j++) {  
         let insideRow = document.createElement('div');
-        insideRow.setAttribute('class', 'two');        
+        insideRow.setAttribute('class', 'two');                        
         row.appendChild(insideRow);
         let insideRow1 = document.createElement('div');
-        insideRow1.setAttribute('class', 'neutral');        
+        insideRow1.setAttribute('class', 'neutral');                 
         insideRow.appendChild(insideRow1);
     }
 }
-//var show = function() {
-    for (i = 0; i < 4; i++) {  
-        let finalSol = document.querySelector('.three'); 
-        let v = Math.floor(Math.random() * 6); 
-        finalSol.className = 'pos' + v;
-        finalArr.push('pos' + v);
-        console.log(finalArr);
-    }
-//}
+for (i = 0; i < 4; i++) {  
+    let finalSol = document.querySelector('.three'); 
+    let v = Math.floor(Math.random() * 6); 
+    finalSol.className = 'pos' + v;
+    finalArr.push('pos' + v);    
+}
 
 resetBtn.addEventListener('click', resetGame);
 function resetGame() {
@@ -63,15 +59,41 @@ function resetGame() {
 
 function vrednost() {      
     document.querySelectorAll('.row .one')[0].className = this.className;
-   
-    /*var row1 = document.querySelectorAll('#row1 div');
-    console.log(row1[0].className);    
+      
+    let row1 = document.querySelectorAll(".neutral");  
     console.log(finalArr);
-
-    for(i = 0; i < 4; i++) { 
-       testArr.push(row1[i].className);
-       console.log(testArr)       
-       break;
-      ;   
-    }*/
+    
+    testArr.push(this.className);
+    console.log(testArr);    
+   
+    let nekiNiz = [];
+    for(i = 0; i < 4; i++) {        
+        if(testArr[i] == finalArr[i]) {
+            //row1[i].className = 'true'; 
+            nekiNiz.push('true');          
+            //testArr.push(row1[i].class);
+        } else if (finalArr.indexOf(testArr[i]) != -1) {
+            //row1[i].className = 'maybe'; 
+            nekiNiz.push('maybe');                
+        }  else {
+            //row1[i].className = 'neutral';   
+            nekiNiz.push('false');                    
+        }   
+    }
+    for(i=0; i< 4; i++) { 
+    if(nekiNiz.indexOf('true') >=0) {
+        var index = nekiNiz.indexOf('maybe');
+        nekiNiz[index] = 'false'; 
+    } }  
+    console.log(nekiNiz) 
+   
+    if(testArr.length === 4) {        
+        for(i=0; i< 4; i++) { 
+            row1[i].className = nekiNiz[i];   
+            testArr = [];  
+        }
+    } 
 }
+   
+
+
