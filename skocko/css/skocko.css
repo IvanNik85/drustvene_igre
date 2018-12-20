@@ -1,21 +1,58 @@
-* {
+body {
+    background-color:#dedede;
     margin: 0;
     padding: 0; 
 }
 .container {
-    height: 650px;
-    margin-top: 40px;
+    height: 680px;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
-    position: relative;
-}
+}    
 .div_one {
-    width: 35%;
-    border: 1px solid black;
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 30px 0;
+    margin-right: 10px; 
 }
 .div_two {
-    width: 35%;
-    border: 1px solid black;
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 30px 0;
+    margin-left: 10px;
+}
+.timerDiv {
+    width: 20px;
+    height: 400px;
+    margin: auto;
+    position: relative;
+    background: #e8e803;
+    border: 3px solid black;
+    border-radius: 3px;
+    overflow: hidden;
+}
+#animate {
+  width: 20px;
+  height: 400px;
+  position: absolute;
+  background: #d83c3c;  
+}
+#tajmerBtn {
+    height: 40px;
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 4px;
+    background: #ddde98;
+    outline: none;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+#tajmerBtn:hover {    
+    background: #5b69bb;
+    cursor: pointer;
+    color: #fff;
 }
 .container1 {
     height: 300px;
@@ -25,8 +62,8 @@
 }
 .final { 
     width: 35%;
-    height: 250px;
-    border: 1px solid black;
+    height: 250px;    
+    margin-right: 30px;
 }
 .newGame {
     height: 100px;
@@ -36,41 +73,46 @@
 #new {
     width: 130px;
     height: 50px;
-    background: #d2d2d2;
+    background: #ddde98;
     border: 2px solid #000;
     outline: none;
-    margin-top: 30px;
+    margin-top: 30px;    
     border-radius: 5px;
     font-size: 18px;
+    margin-right: 10px;
 }
 #new:hover {
-    background: #9c9c9c;
+    background: #5b69bb;
     cursor: pointer;
+    color: #fff;
 }
 .possibilities {
     width: 35%;
-    height: 150px;
-    border: 1px solid black;
+    height: 150px;    
 }
 .one, .two, .three {
     width: 100px;
     height: 100px;
-    border: 1px solid black;
+    border: 1px solid black;    
+}
+.one {
+    background-color: #dedede;
 }
 .two {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(69, 184, 178);
+    background-color: #7db7b4;
 }
 .pos0, .pos1, .pos2, .pos3, .pos4, .pos5 {
     width: 100px;
     height: 100px;
     border: 1px solid black;
+    cursor: pointer;   
 }
 .pos0 {
     background: url(../images/jocker.png) no-repeat center;
-    background-size: contain;    
+    background-size: contain;  
 }
 .pos1 {
     background: url(../images/tref.png) no-repeat center;
@@ -111,4 +153,6 @@
 .maybe {
     background-color: rgb(255, 243, 77); 
 }
-
+#hidden {
+    visibility: hidden;   
+}

@@ -11,7 +11,6 @@ let one = document.querySelector('.one');
 let two = document.querySelector('.two');
 let divOne = document.querySelector('.div_one');
 let divTwo = document.querySelector('.div_two');
-let uspeh = 0;
 let finalArr = [];
 let testArr = [];
 
@@ -64,36 +63,47 @@ function vrednost() {
     console.log(finalArr);
     
     testArr.push(this.className);
-    console.log(testArr);    
+    console.log(testArr);           
    
-    let nekiNiz = [];
-    for(i = 0; i < 4; i++) {        
-        if(testArr[i] == finalArr[i]) {
-            //row1[i].className = 'true'; 
-            nekiNiz.push('true');          
-            //testArr.push(row1[i].class);
-        } else if (finalArr.indexOf(testArr[i]) != -1) {
-            //row1[i].className = 'maybe'; 
-            nekiNiz.push('maybe');                
-        }  else {
-            //row1[i].className = 'neutral';   
-            nekiNiz.push('false');                    
-        }   
-    }
-    for(i=0; i< 4; i++) { 
-    if(nekiNiz.indexOf('true') >=0) {
-        var index = nekiNiz.indexOf('maybe');
-        nekiNiz[index] = 'false'; 
-    } }  
-    console.log(nekiNiz) 
-   
-    if(testArr.length === 4) {        
+    nekiNiz = [];
+    var noviKorigovani = [];
+    for(i=0; i<4; i++) {
+        if(testArr[i] == finalArr[i]){
+            nekiNiz.unshift('true');            
+        } else if (testArr.indexOf(finalArr[i]) != -1) {
+            nekiNiz.unshift('maybe'); 
+        } else {
+            nekiNiz.push('false');
+        }
+    }    
+    /*for(i=0; i<4; i++) { 
+    if(nekiNiz.indexOf('true') != -1) {      
+            var index = nekiNiz.indexOf('maybe');           
+            nekiNiz[index] = 'false';                     
+        } 
+    }*/  
+   if(testArr.length === 4) {        
         for(i=0; i< 4; i++) { 
-            row1[i].className = nekiNiz[i];   
+            row1[i].className = nekiNiz[i];            
             testArr = [];  
         }
-    } 
+    }     
 }
-   
+var tajmerAcrivate = document.getElementById('tajmerBtn');
+tajmerAcrivate.addEventListener('click', tajmer);
 
+function tajmer() {
+    tajmerAcrivate.removeEventListener('click', tajmer);
+    let ani = document.getElementById('animate');
+    let pos = 0;
+    let id = setInterval(countdown, 220);
+    function countdown() {
+        if (pos == 400) {
+            clearInterval(id);
+        } else {
+            pos++; 
+            ani.style.top = pos + "px";
+        }
+    }
+}
 
