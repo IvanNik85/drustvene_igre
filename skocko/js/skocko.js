@@ -60,32 +60,38 @@ function vrednost() {
     document.querySelectorAll('.row .one')[0].className = this.className;
       
     let row1 = document.querySelectorAll(".neutral");  
-    console.log(finalArr);
+    //console.log(finalArr);
     
-    testArr.push(this.className);
-    console.log(testArr);           
+    testArr.push(this.className);           
    
     nekiNiz = [];
-    var noviKorigovani = [];
-    for(i=0; i<4; i++) {
-        if(testArr[i] == finalArr[i]){
-            nekiNiz.unshift('true');            
-        } else if (testArr.indexOf(finalArr[i]) != -1) {
-            nekiNiz.unshift('maybe'); 
-        } else {
-            nekiNiz.push('false');
+    var klonResenja = finalArr.slice(0);
+
+    if(testArr.length === 4) { 
+        for(i=0; i<4; i++) {
+            if(testArr[i] == finalArr[i]){
+                nekiNiz.unshift('true');            
+                klonResenja[i] = '';
+                testArr[i] = '';
+            } 
         }
-    }    
-    /*for(i=0; i<4; i++) { 
-    if(nekiNiz.indexOf('true') != -1) {      
-            var index = nekiNiz.indexOf('maybe');           
-            nekiNiz[index] = 'false';                     
-        } 
-    }*/  
-   if(testArr.length === 4) {        
+        for(i=0; i < testArr.length; i++) {
+            for(j=0; j < klonResenja.length; j++) {
+                if(testArr[i] == klonResenja[j] && testArr[i] != '') {
+                    nekiNiz.push('maybe'); 
+                    klonResenja[j] = ''; 
+                    testArr[i] = '';               
+                } 
+            }
+        }  
+        for(i=0; i < testArr.length; i++) {
+            if(testArr[i] != finalArr[i]){
+                nekiNiz.push('false');        
+            }
+        }        
         for(i=0; i< 4; i++) { 
             row1[i].className = nekiNiz[i];            
-            testArr = [];  
+            testArr = [];            
         }
     }     
 }
