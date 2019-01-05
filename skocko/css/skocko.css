@@ -134,7 +134,7 @@ body {
     background: url(../images/star.png) no-repeat center;
     background-size: 85%;
 }
-.row, .row1, .row2, .row3, .row4, .row5, .row6 {
+.rowClick, .row, .row1, .row2, .row3, .row4, .row5, .row6 {
     display: flex;
     justify-content: center;   
 }

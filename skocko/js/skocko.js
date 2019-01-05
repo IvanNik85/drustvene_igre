@@ -48,9 +48,9 @@ for (i = 0; i < 4; i++) {
     let finalSol = document.querySelector('.three'); 
     let v = Math.floor(Math.random() * 6); 
     finalSol.className = 'pos' + v;
-    finalArr.push('pos' + v);    
+    finalArr.push('pos' + v); 
 }
-
+console.log(finalArr)
 resetBtn.addEventListener('click', resetGame);
 function resetGame() {
     location.reload();
@@ -59,24 +59,23 @@ function resetGame() {
 function vrednost() {      
     document.querySelectorAll('.row .one')[0].className = this.className;
       
-    let row1 = document.querySelectorAll(".neutral");  
-    //console.log(finalArr);
+    let row1 = document.querySelectorAll(".neutral"); 
     
     testArr.push(this.className);           
    
     nekiNiz = [];
-    var klonResenja = finalArr.slice(0);
+    let klonResenja = finalArr.slice(0);
 
     if(testArr.length === 4) { 
-        for(i=0; i<4; i++) {
+        for(i = 0; i < 4; i++) {
             if(testArr[i] == finalArr[i]){
                 nekiNiz.unshift('true');            
                 klonResenja[i] = '';
                 testArr[i] = '';
             } 
         }
-        for(i=0; i < testArr.length; i++) {
-            for(j=0; j < klonResenja.length; j++) {
+        for(i = 0; i < testArr.length; i++) {
+            for(j = 0; j < klonResenja.length; j++) {
                 if(testArr[i] == klonResenja[j] && testArr[i] != '') {
                     nekiNiz.push('maybe'); 
                     klonResenja[j] = ''; 
@@ -84,28 +83,35 @@ function vrednost() {
                 } 
             }
         }  
-        for(i=0; i < testArr.length; i++) {
+        for(i = 0; i < testArr.length; i++) {
             if(testArr[i] != finalArr[i]){
                 nekiNiz.push('false');        
             }
         }        
-        for(i=0; i< 4; i++) { 
+        for(i = 0; i < 4; i++) { 
             row1[i].className = nekiNiz[i];            
             testArr = [];            
         }
     }     
 }
-var tajmerAcrivate = document.getElementById('tajmerBtn');
-tajmerAcrivate.addEventListener('click', tajmer);
-
+let timerActivate = document.getElementById('tajmerBtn');
+let timerActivate2 = document.querySelectorAll('.rowClick div');
+timerActivate.addEventListener('click', tajmer);
+for(i=0; i<6; i++){
+    timerActivate2[i].addEventListener('click', tajmer);
+}
 function tajmer() {
-    tajmerAcrivate.removeEventListener('click', tajmer);
+    timerActivate.removeEventListener('click', tajmer);
+    for(i=0; i<6; i++){
+        timerActivate2[i].removeEventListener('click', tajmer);
+    }
     let ani = document.getElementById('animate');
     let pos = 0;
-    let id = setInterval(countdown, 220);
+    let id = setInterval(countdown, 120);
     function countdown() {
         if (pos == 400) {
             clearInterval(id);
+            alert(`Vreme Vam je isteklo! \nIgra je gotova!`);
         } else {
             pos++; 
             ani.style.top = pos + "px";
