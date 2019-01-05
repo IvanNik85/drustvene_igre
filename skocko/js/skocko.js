@@ -49,11 +49,42 @@ for (i = 0; i < 4; i++) {
     let v = Math.floor(Math.random() * 6); 
     finalSol.className = 'pos' + v;
     finalArr.push('pos' + v); 
+    finalSol.style.visibility = 'hidden';
 }
 console.log(finalArr)
 resetBtn.addEventListener('click', resetGame);
 function resetGame() {
     location.reload();
+}
+
+let id;
+let timerActivate = document.getElementById('tajmerBtn');
+let timerActivate2 = document.querySelectorAll('.rowClick div');
+timerActivate.addEventListener('click', tajmer);
+for(i=0; i<6; i++){
+    timerActivate2[i].addEventListener('click', tajmer);
+}
+function tajmer() {
+    timerActivate.removeEventListener('click', tajmer);
+    for(i=0; i<6; i++){
+        timerActivate2[i].removeEventListener('click', tajmer);
+    }
+    let ani = document.getElementById('animate');
+    let pos = 0;
+    id = setInterval(countdown, 220);
+    function countdown() {
+        if (pos == 400) {
+            clearInterval(id);
+            alert(`Vreme Vam je isteklo! \nIgra je gotova!`); 
+            for(i = 0; i < 4; i++) {
+                document.querySelectorAll('.wrap div')[i].style.visibility = "initial";
+                document.querySelectorAll('.wrap div')[i].style.border = "none";
+            }           
+        } else {
+            pos++; 
+            ani.style.top = pos + "px";
+        }
+    }
 }
 
 function vrednost() {      
@@ -91,31 +122,17 @@ function vrednost() {
         for(i = 0; i < 4; i++) { 
             row1[i].className = nekiNiz[i];            
             testArr = [];            
-        }
-    }     
-}
-let timerActivate = document.getElementById('tajmerBtn');
-let timerActivate2 = document.querySelectorAll('.rowClick div');
-timerActivate.addEventListener('click', tajmer);
-for(i=0; i<6; i++){
-    timerActivate2[i].addEventListener('click', tajmer);
-}
-function tajmer() {
-    timerActivate.removeEventListener('click', tajmer);
-    for(i=0; i<6; i++){
-        timerActivate2[i].removeEventListener('click', tajmer);
-    }
-    let ani = document.getElementById('animate');
-    let pos = 0;
-    let id = setInterval(countdown, 120);
-    function countdown() {
-        if (pos == 400) {
+        }  
+        var nol =  nekiNiz.slice(0, 4);
+        console.log(nol);        
+        if(nol.every(svaki => svaki === 'true')){  
+            for(i in nol) {              
+            document.querySelectorAll('.wrap div')[i].style.visibility = "initial";
+            }
             clearInterval(id);
-            alert(`Vreme Vam je isteklo! \nIgra je gotova!`);
-        } else {
-            pos++; 
-            ani.style.top = pos + "px";
+            alert(`Čestitamo, našli ste konačno rešenje!`); 
         }
-    }
+    }  
 }
+
 
