@@ -76,10 +76,7 @@ function tajmer() {
         if (pos == 400) {
             clearInterval(id);
             alert(`Vreme Vam je isteklo! \nIgra je gotova!`); 
-            for(i = 0; i < 4; i++) {
-                document.querySelectorAll('.wrap div')[i].style.visibility = "initial";
-                document.querySelectorAll('.wrap div')[i].style.border = "none";
-            }           
+            showFinal();      
         } else {
             pos++; 
             ani.style.top = pos + "px";
@@ -94,45 +91,56 @@ function vrednost() {
     
     testArr.push(this.className);           
    
-    nekiNiz = [];
-    let klonResenja = finalArr.slice(0);
+    attemptArr = [];
+    let cloneFinal = finalArr.slice(0);
 
     if(testArr.length === 4) { 
         for(i = 0; i < 4; i++) {
             if(testArr[i] == finalArr[i]){
-                nekiNiz.unshift('true');            
-                klonResenja[i] = '';
+                attemptArr.unshift('true');            
+                cloneFinal[i] = '';
                 testArr[i] = '';
             } 
         }
         for(i = 0; i < testArr.length; i++) {
-            for(j = 0; j < klonResenja.length; j++) {
-                if(testArr[i] == klonResenja[j] && testArr[i] != '') {
-                    nekiNiz.push('maybe'); 
-                    klonResenja[j] = ''; 
+            for(j = 0; j < cloneFinal.length; j++) {
+                if(testArr[i] == cloneFinal[j] && testArr[i] != '') {
+                    attemptArr.push('maybe'); 
+                    cloneFinal[j] = ''; 
                     testArr[i] = '';               
                 } 
             }
         }  
         for(i = 0; i < testArr.length; i++) {
             if(testArr[i] != finalArr[i]){
-                nekiNiz.push('false');        
+                attemptArr.push('false');        
             }
         }        
         for(i = 0; i < 4; i++) { 
-            row1[i].className = nekiNiz[i];            
+            row1[i].className = attemptArr[i];            
             testArr = [];            
         }  
-        var nol =  nekiNiz.slice(0, 4);
-        console.log(nol);        
-        if(nol.every(svaki => svaki === 'true')){  
-            for(i in nol) {              
-            document.querySelectorAll('.wrap div')[i].style.visibility = "initial";
-            }
+        var attemptArr4 =  attemptArr.slice(0, 4);
+        console.log(attemptArr4);        
+        if(attemptArr4.every(svaki => svaki === 'true')){  
+            showFinal();
             clearInterval(id);
-            alert(`Čestitamo, našli ste konačno rešenje!`); 
+            setTimeout(function(){
+                alert(`Čestitamo, našli ste konačno rešenje!`); 
+            }, 100);
         }
     }  
+    if (document.querySelectorAll('.row .one')[0] == undefined && attemptArr4.every(svaki => svaki === 'true') != true) {
+        clearInterval(id);  
+        setTimeout(function(){
+            alert(`Nemate više pokušaja! \nIgra je gotova!`); 
+            showFinal();     
+        }, 50);                
+    }
 }
-
-
+function showFinal() {
+    for(i = 0; i < 4; i++) {              
+        document.querySelectorAll('.wrap div')[i].style.visibility = "initial";
+        document.querySelectorAll('.wrap div')[i].style.border = "none";
+    }
+}

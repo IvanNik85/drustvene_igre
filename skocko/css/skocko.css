@@ -12,7 +12,7 @@ body {
 .div_one {
     width: 30%;
     border: 2px solid black;
-    border-radius: 4px;
+    border-radius: 5px;
     padding: 30px 0;
     margin-right: 10px; 
     background-color: #c7c7c7;
@@ -20,7 +20,7 @@ body {
 .div_two {
     width: 30%;
     border: 2px solid black;
-    border-radius: 4px;
+    border-radius: 5px;
     padding: 30px 0;
     margin-left: 10px;
     background-color: #c7c7c7;
@@ -50,6 +50,8 @@ body {
     outline: none;
     font-weight: 600;
     margin-bottom: 25px;
+    font-family: myFirstFont;
+    font-weight: 600;
 }
 #tajmerBtn:hover {    
     background: #5b69bb;
@@ -81,7 +83,8 @@ body {
     margin-top: 30px;    
     border-radius: 5px;
     font-size: 18px;
-    margin-right: 10px;
+    margin-right: 10px;   
+    font-family: myFirstFont;
 }
 #new:hover {
     background: #5b69bb;
@@ -171,9 +174,13 @@ body {
 .wrap:last-child {
     border-right: 2px solid black;
 } 
-@media screen and (min-width: 1760px) {
+@media screen and (min-width: 1700px) {
     .rowClick {
         width: 612.5px;
         height: 102px;
     }
+}
+@font-face {
+  font-family: myFirstFont;
+  src: url(../font/DEVROYUN.ttf);
 }
