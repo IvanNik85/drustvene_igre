@@ -176,7 +176,7 @@ body {
 } 
 @media screen and (min-width: 1700px) {
     .rowClick {
-        width: 612.5px;
+        width: 612px;
         height: 102px;
     }
 }
