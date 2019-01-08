@@ -194,6 +194,7 @@
     function endGame() {          
         if(count == 0) {
             alert(`Nemate više pokušaja\nIgra je gotova!`);
+            ispisPreostalih();
             setTimeout(function(){
                 img1.setAttribute("src", "images/11ves.png");    
             }, 1000);  
@@ -211,51 +212,46 @@
                 }          
             }              
         }
+        console.log(resenje)
+        console.log(bar)
 ///////////////////////finalni unos
         finalWord.addEventListener('click', finalUnos);
         function finalUnos() {
             var rec = document.getElementById('rec').value.toLowerCase(); 
 
-        if(rec.length == 1 || !isNaN(rec) || !rec) {  
-            alert(`Molimo unesite konačno rešenje`);
-        } else {             
-        console.log(rec)
-        if(rec == resenje) {
-            for(i = 0; i < resenje.length; i++) {
-                if(rec[i] == bar[i]) {              
-                document.getElementById('td'+ i).innerHTML = rec[i];                
+            if(rec.length == 1 || !isNaN(rec) || !rec) {  
+                alert(`Molimo unesite konačno rešenje`);
+            } else {             
+                console.log(rec)
+                if(rec == resenje) {
+                    for(i = 0; i < resenje.length; i++) {
+                        if(rec[i] == bar[i]) {              
+                        document.getElementById('td'+ i).innerHTML = rec[i];                
+                        } 
+                    }        
+                    alert(`Čestitamo!\nPronašli ste zadatu reč`);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 2000);
+                } else {
+                    alert(`Izgubili ste!`); 
+                    ispisPreostalih();              
                 } 
-            }        
-            alert(`Čestitamo!\nPronašli ste zadatu reč`);
+            }       
+            document.getElementById('rec').value = '';
+        } 
+        function ispisPreostalih() {
+            for(i = 0; i < resenje.length; i++) { 
+                if(document.getElementById('td'+ i).innerHTML == '') {                          
+                document.getElementById('td'+ i).innerHTML = bar[i];
+                document.getElementById('td'+ i).style.color = '#ad0e0e'; 
+                }                
+            }                  
             setTimeout(function(){
-                location.reload();
-            }, 2000);
-        } else {
-           alert(`Izgubili ste!`);
-           setTimeout(function(){
                 location.reload();
             }, 1500);                
         } 
-
-        for(i = 1; i <= 11; i++) {
-            if(count == (10 - i)) {                        
-                img1.setAttribute("src", "images/" + i + "ves.png");          
-            }          
-        }      
-        if(count == 0) {           
-            alert(`Nemate više pokušaja\nIgra je gotova!`); 
-            setTimeout(function(){
-                img1.setAttribute("src", "images/11ves.png");    
-            }, 1000);  
-           
-            setTimeout(function(){
-                location.reload();
-            }, 2500);         
-            } 
-        }     
-        document.getElementById('rec').value = '';       
-    } 
-}
+    }
     </script>
 </body>
 </html>
