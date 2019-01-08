@@ -44,8 +44,12 @@
 }
 #skocko {
     background-color:#4fc7e9;   
-    border: 4px solid #000;
+    border: 4px solid #000;    
     transition: 0.65s;
+}
+#skocko a {
+text-decoration: none;
+color:#000;
 }
 #skocko:hover {
     background-color: #fff355; 

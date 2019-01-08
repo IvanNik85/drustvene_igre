@@ -17,7 +17,7 @@
             <button class='visible' id="vesala" type="button">Vešala</button>
         </div>
         <div id='divTwo' class='games'>
-            <button class='visible' id="skocko" type="button">Skočko</button>
+            <a href="skocko/skocko.html"><button class='visible' id="skocko" type="button">Skočko</button></a>
         </div>
         <div id='divThree' class='games'>
             <button class='visible' id="slova" type="button">Slova</button>
@@ -30,7 +30,9 @@
         var vesala = document.getElementById('vesala');
         var generated = document.querySelector('.generated');
         var link = document.createElement('a');
+        var link1 = document.createElement('a');
         link.setAttribute('href', 'Igra_vesala.html');
+        link1.setAttribute('href', 'Igra_vesala_hard.html');
         var btnOne = document.createElement('button');           
         btnOne.setAttribute('id', 'easy');           
         btnOne.innerHTML = 'Lakše';
@@ -49,14 +51,9 @@
                 btnTwo.className = '';
                 generated.appendChild(link);     
                 link.appendChild(btnOne);                           
-                generated.appendChild(btnTwo);
+                generated.appendChild(link1);
+                link1.appendChild(btnTwo);
             }, 130);
-
-            btnTwo.addEventListener('click', hard);
-            function hard() {
-                btnTwo.removeEventListener('click', hard);
-                alert(`U izradi`);
-            } 
         };
         function remove() {
             setTimeout(() => {

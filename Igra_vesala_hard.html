@@ -13,7 +13,7 @@
             <p>Unesite reč:</p>
             <form>
                 <input id = "unosReci" type="text" autocomplete="off">
-                <button id="potvrdaReci" type="button">Unesi</button>
+                <button class="btn" id="potvrdaReci" type="button">Unesi</button>
             </form>
         </div>
     </div>    
@@ -22,11 +22,11 @@
             <div class="left">
                 Unos: <br>
                 <input id = "slova" type="text">
-                <button id="unos" type="button">Unesi</button>
+                <button class="btn" id="unos" type="button">Unesi</button>
                 <span>Vreme za pokušaj:</span> <div id="tajmer">10</div> <br>
                 Konačno: <br>
                 <input id = "rec" type="text">
-                <button id="konacnoRes" type="button">Unesi</button>
+                <button class="btn" id="konacnoRes" type="button">Unesi</button>
                 <span>Preostali pokušaji:</span> <p id="counter">10</p> <br>                
                 Lista iskorišćenih slova: <br>
                 <input id = "lista" type="text" disabled><br>
@@ -106,21 +106,17 @@
     function unos(){  
         
         clearInterval(stop); 
-       
+        
         broj = 9;
-        setTimeout(function() {noviTajmer.innerHTML = 10;},550);
+        
         stop = setInterval(neka, 1000);        
         function neka() {    
-        noviTajmer.innerHTML = broj--; 
-        if(broj%2!=0) {
-            noviTajmer.style.border = "2px solid green";           
-        }  else {
-            noviTajmer.style.border = "2px solid #d86129";
-        }
+        noviTajmer.innerHTML = broj--;         
             if(broj == 0) {                
-                setTimeout(function() {                                   
-                    clearInterval(stop);                      
-                    setTimeout(function() {                             
+                setTimeout(function() {          
+                    clearInterval(stop); 
+                    setTimeout(function() {
+                        noviTajmer.innerHTML = 10;                           
                         count--;   
                         counter.innerHTML = count;                         
                         inputImages(); 
@@ -186,7 +182,7 @@
                         
         } else if (bar1.indexOf(slovo) != -1) {
             alert(`Vec ste uneli slovo ${slovo}\nPokušajte ponovo!`);
-        } else if(bar1 == ''){
+        } else if(slovo == '' && noviTajmer.innerHTML != 1 || slovo.length > 1){
             alert(`Molimo unesite slovo!`);
         } 
         document.getElementById('slova').value = '';         
@@ -234,7 +230,9 @@
                         location.reload();
                     }, 2000);
                 } else {
-                    alert(`Izgubili ste!`); 
+                    img1.setAttribute("src", "images/11ves.png");   
+                    alert(`Izgubili ste!`);
+                    clearInterval(stop); 
                     ispisPreostalih();              
                 } 
             }       
