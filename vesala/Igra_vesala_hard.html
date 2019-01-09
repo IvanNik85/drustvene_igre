@@ -106,7 +106,7 @@
     function unos(){  
         
         clearInterval(stop); 
-        
+        noviTajmer.innerHTML = 10;   
         broj = 9;
         
         stop = setInterval(neka, 1000);        
@@ -114,14 +114,11 @@
         noviTajmer.innerHTML = broj--;         
             if(broj == 0) {                
                 setTimeout(function() {          
-                    clearInterval(stop); 
-                    setTimeout(function() {
-                        noviTajmer.innerHTML = 10;                           
+                    clearInterval(stop);                
                         count--;   
                         counter.innerHTML = count;                         
                         inputImages(); 
-                        endGame();  
-                    }, 500);        
+                        endGame(); 
                     if(count != 0){
                         unos();
                     } 
@@ -183,7 +180,7 @@
                         
         } else if (bar1.indexOf(slovo) != -1) {
             alert(`Vec ste uneli slovo ${slovo}\nPokušajte ponovo!`);
-        } else if(slovo == '' && noviTajmer.innerHTML != 1 || slovo.length > 1){
+        } else if(slovo == '' && noviTajmer.innerHTML != 0 || slovo.length > 1){
             alert(`Molimo unesite slovo!`);
         } 
         document.getElementById('slova').value = '';         
