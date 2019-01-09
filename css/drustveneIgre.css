@@ -14,8 +14,7 @@
     background-size: contain;
 }
 .containerGames {
-    margin-top: 150px;
-    height: 500p;    
+    margin-top: 150px;       
     display: flex;
     justify-content: center;
 }
@@ -48,8 +47,8 @@
     transition: 0.65s;
 }
 #skocko a {
-text-decoration: none;
-color:#000;
+    text-decoration: none;
+    color:#000;
 }
 #skocko:hover {
     background-color: #fff355; 
@@ -67,9 +66,13 @@ color:#000;
     color: #000;
     cursor: pointer;    
 }
+.wrap {
+    display: flex;  
+    justify-content: center;
+}
 .generated {
     margin-top: 40px;
-    margin-left: 780px;    
+    width: 50%; 
 }
 #easy, #hard {
     width: 300px;

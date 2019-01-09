@@ -20,10 +20,12 @@
             <a href="skocko/skocko.html"><button class='visible' id="skocko" type="button">Skočko</button></a>
         </div>
         <div id='divThree' class='games'>
-            <button class='visible' id="slova" type="button">Slova</button>
+            <button class='visible' id="slova" type="button">...</button>
+        </div>       
+    </div>   
+    <div div class='wrap'>
+        <div class='generated'>
         </div>
-    </div>
-    <div class='generated'>
     </div>
     
     <script> 
@@ -31,8 +33,8 @@
         var generated = document.querySelector('.generated');
         var link = document.createElement('a');
         var link1 = document.createElement('a');
-        link.setAttribute('href', 'Igra_vesala.html');
-        link1.setAttribute('href', 'Igra_vesala_hard.html');
+        link.setAttribute('href', 'vesala/Igra_vesala.html');
+        link1.setAttribute('href', 'vesala/Igra_vesala_hard.html');
         var btnOne = document.createElement('button');           
         btnOne.setAttribute('id', 'easy');           
         btnOne.innerHTML = 'Lakše';
