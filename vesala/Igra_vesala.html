@@ -10,7 +10,7 @@
 <body>
     <div class = 'inputRemove'> 
         <div class="wraper">
-            <p>Unesite reč:</p>
+            <p>Unesite reč (reči):</p>
             <form>
                 <input id = "unosReci" type="text" autocomplete="off">
                 <button id="potvrdaReci" type="button">Unesi</button>
@@ -169,6 +169,7 @@
               
         if(count == 0) {
             alert(`Nemate više pokušaja\nIgra je gotova!`);
+            final.value = resenje;  
             setTimeout(function(){
             img1.setAttribute("src", "images/11ves.png");    
         }, 1000);          
@@ -220,7 +221,8 @@
                 img1.setAttribute("src", "images/" + i + "ves.png");          
             }          
         }      
-        if(count == 0) {           
+        if(count == 0) {        
+            final.value = resenje;    
             alert(`Nemate više pokušaja\nIgra je gotova!`); 
             setTimeout(function(){
                 img1.setAttribute("src", "images/11ves.png");    
