@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/war.css">
+    <title>Simulacija borbe</title>    
+</head>
+<body>    
+    <div class="Main">
+        <div class="MainWrap">
+            <div class="container">
+                <div class="redPlayer"></div>
+                <div><button type="button" id="borba">Pokreni Borbu</button></div>
+                <div class="bluePlayer"></div>
+            </div>    
+        </div>
+    </div>
+    <script>
+        class Vojska {
+            constructor(name) {
+               this.name = name;
+               this.health = 100;  
+               this.attack = this.attackPower();
+            }        
+            attackPower() {
+                if(this instanceof Pesadija) {
+                    return Math.floor(Math.random() * (20-10) + 10);
+                } else if(this instanceof Avijacija) {
+                    return Math.floor(Math.random()*(50-25) + 25);  
+                } else if(this instanceof Mornarica) {
+                    return Math.floor(Math.random()*(60-30) + 30); 
+                } else {
+                    return 10;
+                } 
+            }   
+            set primljenUdarac(attack) {
+                this.health -= attack;
+            }
+        }
+        class Pesadija extends Vojska {
+            constructor(name, attack) {
+                super(name);   
+                //this.attack = Math.floor(Math.random() * (30-15) + 15);
+            }    
+        }
+        class Avijacija extends Vojska {
+            constructor(name, attack) {
+                super(name);  
+                //this.attack = Math.floor(Math.random()*(60-30) + 30);                           
+            }        
+        }   
+        class Mornarica extends Vojska {
+            constructor(name, attack) {
+                super(name);       
+            }        
+        }               
+            let playerBlue = [];
+            let playerRed = []   
+
+            for(i = 0; i < 3; i++){
+                let pesadinacR = new Pesadija('pesadinacR' + i);
+                let pilotR = new Avijacija('pilotR' + i);
+                let pesadinacB = new Pesadija('pesadinacB' + i);
+                let pilotB = new Avijacija('pilotB' + i);
+                playerRed.unshift(pesadinacR);
+                playerBlue.unshift(pesadinacB);
+                playerRed.push(pilotR);
+                playerBlue.push(pilotB);
+            }   
+            for(i = 0; i < 3; i++){
+                let mornarR = new Mornarica('mornarR' + i);
+                let mornarB = new Mornarica('mornarB' + i);
+                playerRed.push(mornarR);
+                playerBlue.push(mornarB);
+            }
+            let redPlayer = document.querySelector('.redPlayer');
+            let bluePlayer = document.querySelector('.bluePlayer'); 
+            for (i = 0; i < 9; i++) {
+                let divR = document.createElement('div');
+                let divB = document.createElement('div');
+                let divBarR = document.createElement('div');
+                let divBarB = document.createElement('div');
+                let barR = document.createElement('div');
+                let barB = document.createElement('div');
+                barR.className = 'bar';
+                barB.className = 'bar';
+                divBarR.className = 'barR' + i;
+                divBarB.className = 'barB' + i;
+                divR.className = 'divRed' + i;
+                divBarR.style.width = '100%';
+                divBarR.style.height = '100%';
+                divBarR.style.backgroundColor = '#3196a7';
+                divB.className = 'divBlue' + i;
+                divBarB.style.width = '100%';
+                divBarB.style.height = '100%';
+                divBarB.style.backgroundColor = '#3196a7';
+                redPlayer.appendChild(divR);
+                redPlayer.appendChild(barR);
+                barR.appendChild(divBarR);
+                bluePlayer.appendChild(divB);
+                bluePlayer.appendChild(barB);
+                barB.appendChild(divBarB);
+            }   
+            let borba = document.getElementById('borba');
+
+            borba.addEventListener('click', napad);
+            function napad() {
+                for(i in playerBlue) {
+                    playerRed[i].primljenUdarac = playerBlue[Math.floor(Math.random() * 6)].attack; 
+                    playerBlue[i].primljenUdarac = playerRed[Math.floor(Math.random() * 6)].attack; 
+                    if(playerBlue[i].health > 0) {
+                        document.querySelector('.barB' + i).style.width = playerBlue[i].health + '%';
+                    } 
+                    if(playerRed[i].health > 0) {
+                        document.querySelector('.barR' + i).style.width = playerRed[i].health + '%';
+                    }
+                    if(playerBlue[i].health <= 0 && document.querySelector('.divBlue' + i) != null) {
+                        document.querySelector('.divBlue' + i).className = 'dead';
+                        document.querySelector('.barB' + i).style.width = '0%';
+                        playerBlue[i].attack = 0;
+                    }   
+                    if(playerRed[i].health <= 0 && document.querySelector('.divRed' + i) != null) {                        
+                        document.querySelector('.divRed' + i).className = 'dead';
+                        document.querySelector('.barR' + i).style.width = '0%';
+                        playerRed[i].attack == 0;
+                    }       
+                    /* if(playerRed[i].health <= 0) {
+                           playerRed.splice(i, 1); 
+                        } */ 
+                } 
+                console.log(playerRed);   
+                console.log(playerBlue); 
+
+                /*let bar1 = document.querySelector('.bar1');
+                if(!playerRed[3] == false && playerRed[3].health < 100 ) {
+                bar1.style.width = playerRed[3].health + '%';
+                } else {
+                    bar1.style.width = '0%';
+                    console.log(`player dead`)
+                }*/
+            } 
+    </script>
+</body>
+</html>
