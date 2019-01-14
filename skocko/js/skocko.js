@@ -83,7 +83,6 @@ function tajmer() {
         }
     }
 }
-
 function vrednost() {      
     document.querySelectorAll('.row .one')[0].className = this.className;
       
