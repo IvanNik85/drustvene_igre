@@ -55,10 +55,11 @@
     var inputRemove = document.querySelector('.inputRemove'); 
     
     potvrdaReci.addEventListener('click', potvrda);
-    unosReci.addEventListener('keypress', enter);
+    unosReci.addEventListener('keydown', enter);
     function enter(event) {
         if(event.which == 13){            
         potvrda();
+        event.preventDefault();
         }
     }
     function potvrda(){

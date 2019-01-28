@@ -20,6 +20,7 @@
             </div>    
         </div>
     </div>
+    <button id="heal">heal</button>
     <script>
         class Vojska {
             constructor(name) {
@@ -40,6 +41,16 @@
             }   
             set primljenUdarac(attack) {
                 this.health -= attack;
+            }
+            set healTroops(healArmy) {
+                if(this.health + healArmy > 100) {
+                    this.health = 100;
+                } else {
+                    this.health += healArmy;
+                }
+            }
+            set increaseAttack(attack) {
+                this.health -= attack * 1.2;
             }
         }
         class Pesadija extends Vojska {
@@ -63,7 +74,7 @@
             let playerRed = []   
 
             for(i = 0; i < 3; i++){
-                let pesadinacR = new Pesadija('pesadinacR' + i);
+                let pesadinacR = new Pesadija('pesadinacR' + i);                
                 let pilotR = new Avijacija('pilotR' + i);
                 let pesadinacB = new Pesadija('pesadinacB' + i);
                 let pilotB = new Avijacija('pilotB' + i);
@@ -105,20 +116,22 @@
                 bluePlayer.appendChild(divB);
                 bluePlayer.appendChild(barB);
                 barB.appendChild(divBarB);
-            }   
+            }  
+            let heal = document.getElementById('heal'); 
             let borba = document.getElementById('borba');           
            
             borba.addEventListener('click', napad);
             function napad() {
-                let a = 0;                       
+                let a = 0;  
+                
                 for(i = 0; i < 9; i++) {                    
-                    let random = Math.floor(Math.random() * 9);
-                    playerRed[i].primljenUdarac = playerBlue[random].attack; 
+                    let random = Math.floor(Math.random() * 9);                    
+                    playerRed[i].primljenUdarac = playerBlue[random].attack;
                     playerBlue[i].primljenUdarac = playerRed[random].attack;
                     let healthB = document.querySelector('.barB' + i);
-                    let healthR = document.querySelector('.barR' + i);
+                    var healthR = document.querySelector('.barR' + i);
                     let divB = document.querySelector('.divBlue' + i);
-                    let divR = document.querySelector('.divRed' + i);                    
+                    let divR = document.querySelector('.divRed' + i); 
 
                     if(playerBlue[i].health > 0) {
                         healthB.style.width = playerBlue[i].health + '%';
@@ -138,8 +151,8 @@
                     }
                     /* if(playerRed[i].health <= 0) {
                            playerRed.splice(i, 1); 
-                        } */ 
-                }     
+                        } */
+                }                       
                                                         
                   let alive = playerBlue.map(al => {                    
                         if(al.attack != 0){
@@ -198,10 +211,30 @@
                         intervalCondition(tieG, tie);
                     }                    
                 } 
+                function healthw() {
+                    return function() {   
+                        for(i=0;i<3;i++) { 
+                            let row = i*3; 
+                            if(playerRed[row].attack == 0) {   
+                                console.log(`no heal`)
+                             } else if(playerRed[row].attack > 0) {
+                                    playerRed[row].healTroops = 10;                                        
+                                    document.querySelector('.barR' + row).style.width = playerRed[row].health + '%';
+                            }
+                        }
+                    } 
+                }
+                    
+                
+                heal.addEventListener('click', healthw());
+               
             } 
+           
+            
+                   
             /*let red = document.querySelector('.divRed1');
             let redWrap = document.createElement('div');
-            redWrap.className = 'divRednew1';
+            redWrap.className = 'target';
             red.appendChild(redWrap);*/           
             
     </script>
