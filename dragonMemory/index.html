@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>Memory_game</title>
+    <link rel="icon" href="images/dragonLogo.png">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="mainMenu">
+        <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 main"> 
+                            <h1>Dragon memory</h1>       
+                            <button class="menuBtn highscores">Highscores</button>                    
+                            <button class="menuBtn cardBack">Card Style</button> 
+                            <button class="menuBtn cardBack"><span>Timer</span><input type="checkbox"></button> 
+                            <button class="menuBtn difficulty">Level</button>                            
+                            <canvas id="myCanvas" width="400" height="140"></canvas>                          
+                        <div class="btnDiv">
+                            <button class="menuBtn one">Easy</button>
+                            <button class="menuBtn two">Medium</button>
+                            <button class="menuBtn three">Hard</button>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="wrapImg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 menu"></div>
+                    <div class="col-md-9">
+                        <div class="memoryGame">
+                                               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="memory.js"></script>
+</body>
+</html>

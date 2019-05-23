@@ -64,6 +64,8 @@
     }
     function potvrda(){
         var resenje = document.getElementById('unosReci').value.toLowerCase();
+        var regexp = (/\W|_|\d/gi);
+        // var nonWords = resenje.match(regexp);
         console.log(resenje);   
         if(isNaN(resenje) && resenje.length > 1) {
             cont.setAttribute('class','container');
@@ -214,9 +216,10 @@
 ///////////////////////finalni unos
         finalWord.addEventListener('click', finalUnos);
         function finalUnos() {
-            var rec = document.getElementById('rec').value.toLowerCase(); 
+            var rec = document.getElementById('rec').value.toLowerCase();
+            var nonWords1 = rec.match(regexp); 
 
-            if(rec.length == 1 || !isNaN(rec) || !rec) {  
+            if(rec.length == 1 || nonWords1 || rec.length == "") {  
                 alert(`Molimo unesite konačno rešenje`);
             } else {             
                 console.log(rec)

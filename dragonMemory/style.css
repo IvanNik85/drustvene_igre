@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;  
+}
+.wrapper {
+    background: url(images/cave.jpg) no-repeat center;
+    background-size: cover;
+    background-color: rgb(209, 209, 209);
+    height: 100vh;
+    font-size: 18px;
+    display: none;
+}
+.mainMenu {
+   /* display: none;  */   
+}
+.main {
+    background-color: #d2ba5a;  
+    width: 100%;
+    height: 600px;
+    margin-top: 10%;
+    border: 5px solid black;  
+}
+.menuBtn {
+    width: 140px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: rgb(226, 137, 137);
+    border: transparent;
+    margin: 0 7px; 
+    position: relative;
+    border: 2px solid black;
+}
+.menuBtn:focus {
+    outline: none;
+}
+#myCanvas {
+    display: block;
+    margin: auto;
+    /* border: 1px solid #d3d3d3; */
+}
+/* .one:before, .two:before, .three:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: -50px;
+    right: 50%;
+    border: 2px solid transparent;
+}
+.one:after, .three:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;    
+    top: -50px; 
+    border: 2px solid transparent;
+}
+.one:after {
+    right: -82px;
+}
+.three:after {
+    left: -86px;
+} */
+.difficulty {
+    position: relative;
+    width: 140px;
+    height: 40px;
+    background-color: rgb(103, 206, 117);
+    display: block;
+    margin: auto;
+    border: transparent;
+}
+.cardBack, .highscores {
+    display: block;
+    margin: 10px auto;
+}
+/* .difficulty:before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    top: 40px;
+    right: 50%;
+    border: 2px solid transparent;
+}
+.difficulty:focus:before {
+    border: 2px solid black;
+    height: 60px;    
+    transition: height 0.5s linear;
+}
+.difficulty:focus ~ .btnDiv .one:after,
+.difficulty:focus ~ .btnDiv .three:after {
+    border: 2px solid black;
+    width: 155px;
+    transition: width 0.5s linear 0.5s; 
+} 
+.difficulty:focus ~ .btnDiv .one:before,
+.difficulty:focus ~ .btnDiv .two:before,
+.difficulty:focus ~ .btnDiv .three:before {
+    border: 2px solid black;
+    height: 50px;
+    transition: height 0.5s linear 1s;
+}  */
+.btnDiv {
+    display: flex;
+    justify-content: center; 
+    /* display: none; */
+}
+.wrapImg {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+}
+.memoryGame {
+    width: 100%;
+    height: 825px;
+    display: flex;
+    flex-flow: row wrap;
+    perspective: 1000px;
+}
+/* 16.666%  for 36
+    20%  for 25*/
+.memoryGame .card {
+    width: calc(25% - 6px);
+    height: calc(25% - 6px);
+    position: relative;
+    margin: 3px;   
+    transform-style: preserve-3d;
+    transition: .5s;   
+    background-color: transparent; 
+    border: none;
+}
+.card.flip {
+    transform: rotateY(180deg);    
+    transition: .5s;
+}
+.front, .back {
+    width: 100%;
+    height: auto;
+    position: absolute;    
+    backface-visibility: hidden; 
+    border-radius: 5px;     
+}
+.front {
+    transform: rotateY(180deg);
+}
+@font-face {
+    font-family: memoryFont;
+    src: url(./font/GreatVibes-Regular.ttf);
+}
+.menu {
+    border: 2px solid #fad232;
+}
+.menu h1, .main h1 {
+    font-family: memoryFont;
+    font-size: 65px;    
+    color:#fad232;
+    text-align: center;
+    margin-top: 20px;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+#newGame, #options {
+    width: 140px;
+    height: 35px;
+    transform: scale(1);
+    display: block;
+    margin: 20px auto;
+    background-color: rgb(145, 20, 68);
+    outline: none;
+    border:2px solid black;
+    color: #fff;
+    border-radius: 3px;
+}
+#newGame:active {
+    transform: scale(.97);
+    transition: .1s;
+}
+#attempts {
+    text-align: center;
+    color: #fff;
+}
+#num {
+    padding-left: 5px;
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .memoryGame {
+        height: 690px;
+    }
+}
+/* (min-width: 768px) and  */
+@media (max-width: 992px) { 
+    .memoryGame {
+        height: 510px;
+    }
+}
