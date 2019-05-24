@@ -1,53 +1,82 @@
 $(document).ready(function() {
 
+    $('.one').click(function() {  
+        dificultyLevel(8);          
+        $('.wrapper').show();
+        $('.main').hide();           
+    });
+
+    $('.two').click(function() {  
+        dificultyLevel(12);        
+        $('.memoryGame .card').css({
+            width: 'calc(20% - 6px)',
+            height: 'calc(20% - 6px)'
+        });
+        $('.wrapper').show();
+        $('.main').hide();           
+    });
+
+    $('.three').click(function() {
+            dificultyLevel(18); 
+                 
+        $('.memoryGame .card').css({
+            width: 'calc(16.666% - 6px)',
+            height: 'calc(16.666% - 6px)'
+        })        
+        $('.wrapper').show();
+        $('.main').hide();           
+    });
+
+
     function dificultyLevel(num) {
+        $('.memoryGame').empty();
         for(i = 0; i < 2; i++) {
-            for(j = 1; j <= num; j++) {
+            for(j = 1; j <= num; j++) {                             
                 $('.memoryGame').append(`<div class="card" data-name="dragon${j}">
                 <img class="front" src="images/dragon${j}.jpg" alt="dragon${j}">
-                <img class="back" src="images/card.png" alt="cardBack"> 
-                </div>`);   
-            }
+                <img class="back" src="images/card6.png" alt="cardBack"> 
+                </div>`);
+            }            
+        } 
+        if(num == 12 && j < 14) {   
+            console.log(`yes`)                
+            $('.memoryGame').append(`<div class="card1"<img src="images/dragon25.jpg" alt="neutral"></div>`)
+        }          
+ 
+        let cards = document.querySelectorAll('.card');
+        cards.forEach(card => card.addEventListener('click', flip));
+
+        let hasFlipped = false;
+        let firstCard, secondCard;
+        let lockBoard = false;
+        let count = 0;
+
+        function flip() {       
+            if(lockBoard) return;
+            if(this == firstCard) return;
+            this.classList.add('flip');    
+            if(!hasFlipped) {       
+                hasFlipped = true;      
+                firstCard = this;
+            } else {        
+                hasFlipped = false;   
+                secondCard = this;                    
+                $('#num').text(++count);  
+                if(firstCard.dataset.name == secondCard.dataset.name) {
+                    firstCard.removeEventListener('click', flip);
+                    secondCard.removeEventListener('click', flip);
+                } else {       
+                    lockBoard = true;      
+                    setTimeout(function() {
+                        firstCard.classList.remove('flip');
+                        secondCard.classList.remove('flip');
+                        lockBoard = false;
+                        firstCard = null;
+                    }, 1000);              
+                }             
+            }        
         }   
-    }
-    dificultyLevel(8)
-    $('.menu').append(`<h1>Dragon Memory Game</h1><button id="newGame">New Game</button>
-                       <button id="options">Options</button>
-                       <div id="attempts"><span>Attempts:</span><span id="num">0</span><div>`
-    );
-    let cards = document.querySelectorAll('.card');
-    cards.forEach(card => card.addEventListener('click', flip));
-
-    let hasFlipped = false;
-    let firstCard, secondCard;
-    let lockBoard = false;
-    let count = 0;
-
-    function flip() {       
-        if(lockBoard) return;
-        if(this == firstCard) return;
-        this.classList.add('flip');    
-        if(!hasFlipped) {       
-            hasFlipped = true;      
-            firstCard = this;
-        } else {        
-            hasFlipped = false;   
-            secondCard = this;                    
-            $('#num').text(++count);  
-            if(firstCard.dataset.name == secondCard.dataset.name) {
-                firstCard.removeEventListener('click', flip);
-                secondCard.removeEventListener('click', flip);
-            } else {       
-                lockBoard = true;      
-                setTimeout(function() {
-                    firstCard.classList.remove('flip');
-                    secondCard.classList.remove('flip');
-                    lockBoard = false;
-                    firstCard = null;
-                }, 1000);              
-            }             
-        }        
-    }        
+    }     
 
     (function shufle() {
         $('.card').each(function() {
@@ -63,7 +92,7 @@ $(document).ready(function() {
 
     let c = document.getElementById("myCanvas");
     let ctx = c.getContext("2d");
-    ctx.strokeStyle = 'green';
+    ctx.strokeStyle = '#fad232';
     ctx.lineWidth = 2.5;
     $('.difficulty').click(function(){ 
         animate(); 
@@ -97,23 +126,7 @@ $(document).ready(function() {
                 $('.btnDiv').fadeIn();
             }                
             ctx.stroke();                       
-        }
-    
-        $('.one').click(function() {  
-            // dificultyLevel(8);          
-            $('.wrapper').show();
-            $('.main').hide();           
-        });
-
-        $('.three').click(function() {             
-            dificultyLevel(10);
-            $('.memoryGame .card').css({
-                width: 'calc(16.666% - 6px)',
-                height: 'calc(16.666% - 6px)'
-            })        
-            $('.wrapper').show();
-            $('.main').hide();           
-        });
+        } 
         
         $('#options').click(function() {
             $('.main').show();

@@ -12,22 +12,25 @@
 </head>
 <body>
     <div class="mainMenu">
-        <div class="container">
-                <div class="row">
+        <div class="menuWrap">
+            <div class="container">
+                <div class="row">                
                     <div class="col-md-8 offset-md-2 main"> 
+                        <div class="wrap">                           
                             <h1>Dragon memory</h1>       
                             <button class="menuBtn highscores">Highscores</button>                    
                             <button class="menuBtn cardBack">Card Style</button> 
                             <button class="menuBtn cardBack"><span>Timer</span><input type="checkbox"></button> 
                             <button class="menuBtn difficulty">Level</button>                            
                             <canvas id="myCanvas" width="400" height="140"></canvas>                          
-                        <div class="btnDiv">
-                            <button class="menuBtn one">Easy</button>
-                            <button class="menuBtn two">Medium</button>
-                            <button class="menuBtn three">Hard</button>                           
+                            <div class="btnDiv">
+                                <button class="menuBtn one">Easy</button>
+                                <button class="menuBtn two">Medium</button>
+                                <button class="menuBtn three">Hard</button>                           
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div>            
             </div>
         </div>
     </div>
@@ -35,7 +38,12 @@
         <div class="wrapImg">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 menu"></div>
+                    <div class="col-md-3 menu">
+                        <h1>Dragon Memory</h1>
+                        <button id="newGame">New Game</button>
+                        <button id="options">Options</button>
+                        <div id="attempts"><span>Attempts:</span><span id="num">0</span></div>
+                    </div>
                     <div class="col-md-9">
                         <div class="memoryGame">
                                                
