@@ -19,7 +19,7 @@
                         <div class="wrap">                           
                             <h1>Dragon memory</h1>       
                             <button class="menuBtn highscores">Highscores</button>                    
-                            <button class="menuBtn cardBack">Card Style</button> 
+                            <button type="button" class="menuBtn cardBack" data-toggle="modal" data-target="#myModal">Card Style</button>
                             <button class="menuBtn cardBack"><span>Timer</span><input type="checkbox"></button> 
                             <button class="menuBtn difficulty">Level</button>                            
                             <canvas id="myCanvas" width="400" height="140"></canvas>                          
@@ -27,13 +27,32 @@
                                 <button class="menuBtn one">Easy</button>
                                 <button class="menuBtn two">Medium</button>
                                 <button class="menuBtn three">Hard</button>                           
-                            </div>
+                            </div> 
+
+                            <div class="startBtn"><button class="menuBtn start">Start</button></div>
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog"> 
+                                    <div class="modal-content">       
+                                        <!-- <button type="button" data-dismiss="modal">&times;</button> -->
+                                        <!-- <h4 class="modal-title">Modal Header</h4>  -->
+                                        <!-- <img src="/images/card0.png" alt="card0"> 
+                                        <img src="/images/card1.png" alt="card1">
+                                        <img src="/images/card2.png" alt="card2">
+                                        <img src="/images/card3.png" alt="card3">
+                                        <img src="/images/card4.png" alt="card4">
+                                        <img src="/images/card5.png" alt="card5">
+                                        <img src="/images/card6.png" alt="card6"> 
+                                        <img src="/images/card7.png" alt="card7">               -->
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">close &times;</button>
+                                    </div> 
+                                </div>
+                            </div>                           
                         </div>
-                    </div>
+                    </div>                    
                 </div>            
             </div>
         </div>
-    </div>
+    </div>    
     <div class="wrapper">
         <div class="wrapImg">
             <div class="container">
@@ -53,6 +72,7 @@
             </div>
         </div>
     </div>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="memory.js"></script>
 </body>
 </html>

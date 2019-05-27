@@ -11,20 +11,21 @@
     font-size: 18px;
     display: none;
 }
-/* .mainMenu {
-    background: url(images/dragonLair.jpg) no-repeat center;
+.mainMenu {
+    background: url(images/caveBAc.jpg) no-repeat center;
     background-size: cover;
     height: 100vh;
 }
 .menuWrap {
     background-color: rgba(0, 0, 0, 0.7);
     height: 100%;
-} */
+}
 .mainMenu .main {     
     background: url(images/dragonBack.jpg) no-repeat center;
     background-size: contain;
     width: 100%;
     height: 600px;
+    position: relative;
     margin-top: 10%;
     border: 5px solid black;  
     padding: 0;    
@@ -34,6 +35,20 @@
     width: 100%;
     height: 100%;
     padding-top: 30px;    
+}
+/* modal style */
+.modal-dialog .modal-content {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-flow: row wrap;
+}
+.modal-content img {
+    width: 25%;
+    height: 25%;
+    padding: 5px;
 }
 .menuBtn {
     width: 140px;
@@ -48,6 +63,11 @@
 }
 .menuBtn:focus {
     outline: none;
+}
+.start {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 }
 #myCanvas {
     display: block;
@@ -87,8 +107,17 @@
     border: transparent;
 }
 .cardBack, .highscores {
+    position: relative;
     display: block;
     margin: 10px auto;
+}
+.cardBack input{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    right: 10px;
+    top: 35%;
+    border: 1px solid black;
 }
 /* .difficulty:before {
     position: absolute;
