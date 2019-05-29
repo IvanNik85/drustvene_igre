@@ -31,25 +31,27 @@ $(document).ready(function() {
         par.parentElement.style.visibility = 'hidden' 
     }
 
-    $('.start').click(function() {        
-        if(dificulty == 8) {
-            dificultyLevel(8, cardStyle || 'card1');           
-        } else if(dificulty == 12) {
-            dificultyLevel(12, cardStyle || 'card1');
-            $('.memoryGame .card').css({
-                width: 'calc(20% - 6px)',
-                height: 'calc(20% - 6px)'
-            });           
-        } else if(dificulty == 18){
-            dificultyLevel(18, cardStyle || 'card1');
-            $('.memoryGame .card').css({
-                width: 'calc(16.666% - 6px)',
-                height: 'calc(16.666% - 6px)'
-            })     
-        } else if(cardStyle) {
-            dificultyLevel(8, cardStyle);
-        } else {
-            dificultyLevel(8, 'card1');
+    $('.start').click(function() {  
+        switch(dificulty) {
+            case 8:
+                dificultyLevel(8, cardStyle || 'card1'); 
+                break; 
+            case 12:
+                dificultyLevel(12, cardStyle || 'card1');
+                $('.memoryGame .card').css({
+                    width: 'calc(20% - 6px)',
+                    height: 'calc(20% - 6px)'
+                });            
+                break; 
+            case 18:
+                dificultyLevel(18, cardStyle || 'card1');
+                $('.memoryGame .card').css({
+                    width: 'calc(16.666% - 6px)',
+                    height: 'calc(16.666% - 6px)'
+                }) 
+                break; 
+            default:
+                dificultyLevel(8, cardStyle || 'card1');
         }
         $('.wrapper').show();
         $('.mainMenu').hide();   
@@ -129,8 +131,7 @@ $(document).ready(function() {
             reset(); 
             setTimeout(function() {
                 $('.btnDiv').css('visibility', 'visible'); 
-            },1000)
-                                 
+            },900)                                 
         } else {
             animate();
             $('.btnDiv').css('visibility', 'visible'); 
@@ -142,10 +143,10 @@ $(document).ready(function() {
         let x = 0;    
         let y = 200;   
         let z = 200;
-        let q = 70; 
+        let q = 40; 
         function animate() {
            window.requestAnimationFrame(animate); 
-            if(x <= 70) { 
+            if(x <= 40) { 
                 ctx.beginPath();               
                 ctx.moveTo(200,0);
                 ctx.lineTo(200,x);   
@@ -153,51 +154,119 @@ $(document).ready(function() {
             } else if(y < 350 && z > 50) {
                 y += 5;  
                 z -= 5;  
-                ctx.moveTo(200,70);
-                ctx.lineTo(y,70);               
-                ctx.lineTo(z,70); 
-            } else if(q <= 140){                                                
-                ctx.moveTo(50,70);
+                ctx.moveTo(200,40);
+                ctx.lineTo(y,40);               
+                ctx.lineTo(z,40); 
+            } else if(q <= 80){                                                
+                ctx.moveTo(50,40);
                 ctx.lineTo(50,q);
-                ctx.moveTo(200,70);
+                ctx.moveTo(200,40);
                 ctx.lineTo(200,q);
-                ctx.moveTo(350,70);
+                ctx.moveTo(350,40);
                 ctx.lineTo(350,q);   
                 q += 5;                
             } else {                
                 $('.btnDiv').fadeIn();
             }    
             ctx.stroke();             
-        }         
+        }    
+        
+        $('.timer').click(function(){ 
+            animateTime();           
+        });
+
+        $('.timeBtn').css('display', 'none');
+        let t = document.getElementById("myCanvasTime");
+        let cont = t.getContext("2d");    
+        cont.strokeStyle = '#fad232';
+        cont.lineWidth = 2.5;        
+        let g = 130; 
+        let h = 270;  
+        let j = 2*Math.PI; 
+        let k = 0*Math.PI;   
+        let l = 1*Math.PI;
+        let i = 1*Math.PI;
+        function animateTime() {
+            window.requestAnimationFrame(animateTime); 
+            if(g >= 60 || h <= 340) { 
+                 cont.beginPath();               
+                 cont.moveTo(130, 40);
+                 cont.lineTo(g, 40);
+                 cont.moveTo(270, 40);
+                 cont.lineTo(h, 40);   
+                 g -= 5; 
+                 h += 5;
+            } else if(j>=1.5*Math.PI || k <= 0.5*Math.PI ||
+                 l<=1.5*Math.PI || i>=0.5*Math.PI) { 
+                 cont.moveTo(60,40);                 
+                 cont.arc(20,40,30,2*Math.PI, j, true);
+                 cont.moveTo(60,40);
+                 cont.arc(20,40,30,0*Math.PI, k);
+                 cont.moveTo(340,40);                 
+                 cont.arc(380,40,30,1*Math.PI, l);
+                 cont.moveTo(340,40);
+                 cont.arc(380,40,30,1*Math.PI, i, true); 
+                 k += 0.075;  
+                 j -= 0.075;      
+                 l += 0.075;      
+                 i -= 0.075;          
+            } else {
+                $('.timeBtn').show(); 
+            }
+            cont.stroke();             
+         }   
 
         function reset() {   
             $('#myCanvas').show();                   
-            ctx.clearRect(0, 0, 400, 140);                      
+            ctx.clearRect(0, 0, 400, 80);                      
             x = 0;    
             y = 200;   
             z = 200;
-            q = 70;
+            q = 40;
         }
         
         $('#options').click(function() { 
+            $('.main').append('<button class="menuBtn backBtn"><i class="fa fa-angle-double-left"></i></button>')
             $('.mainMenu').show();
-            $('.wrapper').hide();           
+            $('.wrapper').hide(); 
+            hide(document.querySelector('.one'));
+            $('.backBtn').on('click', hideMenu); 
         });
-    // let c = document.getElementById("myCanvas");
-    // let ctx = c.getContext("2d");
-    // ctx.moveTo(200,0);
-    // ctx.lineTo(200,70);
-    // ctx.moveTo(200,70);
-    // ctx.lineTo(350,70);
-    // ctx.moveTo(200,70);
-    // ctx.lineTo(50,70);
-    // ctx.moveTo(50,70);
-    // ctx.lineTo(50,140);
-    // ctx.moveTo(200,70);
-    // ctx.lineTo(200,140);
-    // ctx.moveTo(350,70);
-    // ctx.lineTo(350,140);
-    // ctx.stroke();
+        function hideMenu() {
+            if(cardStyle) {
+                let back = document.querySelectorAll('.back');
+                back.forEach(card => card.setAttribute(`src`, `images/${cardStyle}.png`));                
+            }               
+            $('.mainMenu').hide();
+            $('.wrapper').show(); 
+        }     
+
+       
+        setInterval(timer, 1000);
+        let s = 0;
+        let m = 0;
+        let min = '0' + m;
+        let sec;
+        
+        function timer() {  
+            s++;  
+            if(s == 60) {
+                s = 0
+                m++;
+            }  
+            if(s > 9) {
+                sec = s;                
+            } else if(s <= 9){
+                sec = '0' + s;                              
+            } 
+            if(m > 9) {
+                min = m; 
+            } else if(m <= 9) {
+                min = '0' + m; 
+            }
+            $('.clock').text(min + ':' + sec);  
+        }
+
 });
     
 
