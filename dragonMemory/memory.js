@@ -1,6 +1,7 @@
 $(document).ready(function() {
     let cardStyle;
     let dificulty;
+    let timerReg;
     for(let i = 0; i < 12; i++) {
         $('.modal-content').prepend(`<img src="./images/card${i}.png" alt="card${i}" id="card${i}" data-dismiss="modal">`);       
     } 
@@ -10,28 +11,23 @@ $(document).ready(function() {
     function changeBack() {
        cardStyle = this.id;              
     }
-
-    $('.one').click(function() {  
-        dificulty = 8;
-        hide(this);          
-    });
-
-    $('.two').click(function() {  
-        dificulty = 12;
-        hide(this);       
-    });
-
-    $('.three').click(function() {
-        dificulty = 18;
-        hide(this);    
-    }); 
+  
+    let selectDif = ['.one','.two','.three'];
+    let dif = [8, 12, 18];
+    for(let i = 0; i < 3; i++) {
+        $(selectDif[i]).click(function() {  
+            dificulty = dif[i];
+            hide(this);       
+        });
+    }
     
     function hide(par) {
         $('#myCanvas').hide();
-        par.parentElement.style.visibility = 'hidden' 
+        par.parentElement.style.visibility = 'hidden'; 
     }
 
     $('.start').click(function() {  
+        timerReg = setInterval(timer, 1000);
         switch(dificulty) {
             case 8:
                 dificultyLevel(8, cardStyle || 'card1'); 
@@ -125,7 +121,7 @@ $(document).ready(function() {
     ctx.strokeStyle = '#fad232';
     ctx.lineWidth = 2.5;
     let called = false;
-    $('.difficulty').click(function(){ 
+    $('.difficulty').click(function(){         
         $('.btnDiv').css('visibility', 'hidden');         
         if(called) {            
             reset(); 
@@ -136,9 +132,9 @@ $(document).ready(function() {
             animate();
             $('.btnDiv').css('visibility', 'visible'); 
             called = true;             
-        }  
-       
-    })      
+        }        
+    })     
+
     $('.btnDiv').css('display', 'none');
         let x = 0;    
         let y = 200;   
@@ -171,9 +167,31 @@ $(document).ready(function() {
             ctx.stroke();             
         }    
         
-        $('.timer').click(function(){ 
-            animateTime();           
+        let called1 = false;  //reset timer values when clicking multiple times or when going back and changing
+        $('.timer').click(function(){      //alert when chosing different level or change timer       
+            $('.timeBtn').css('visibility', 'hidden');         //endgame - win or lose
+            if(called1) {            
+                resetTimeCanvas(); 
+                setTimeout(function() {
+                    $('.timeBtn').css('visibility', 'visible'); 
+                },600)                                 
+            } else {
+                animateTime();
+                $('.timeBtn').css('visibility', 'visible'); 
+                called1 = true;             
+            }        
         });
+
+        function resetTimeCanvas() {
+            $('#myCanvasTime').show();                   
+            cont.clearRect(0, 0, 400, 80);                      
+            g = 130; 
+            h = 270;  
+            j = 2*Math.PI; 
+            k = 0*Math.PI;   
+            l = 1*Math.PI;
+            i = 1*Math.PI;   
+        }
 
         $('.timeBtn').css('display', 'none');
         let t = document.getElementById("myCanvasTime");
@@ -225,12 +243,16 @@ $(document).ready(function() {
             q = 40;
         }
         
-        $('#options').click(function() { 
+        $('#options').click(function() {             
             $('.main').append('<button class="menuBtn backBtn"><i class="fa fa-angle-double-left"></i></button>')
             $('.mainMenu').show();
             $('.wrapper').hide(); 
-            hide(document.querySelector('.one'));
+            hide(document.querySelector('.one'));            
             $('.backBtn').on('click', hideMenu); 
+            clearInterval(timerReg);
+            $('.backBtn').click(function() {
+                timerReg = setInterval(timer, 1000);
+            });
         });
         function hideMenu() {
             if(cardStyle) {
@@ -239,32 +261,54 @@ $(document).ready(function() {
             }               
             $('.mainMenu').hide();
             $('.wrapper').show(); 
-        }     
-
+        }  
        
-        setInterval(timer, 1000);
         let s = 0;
         let m = 0;
-        let min = '0' + m;
-        let sec;
+        let min;
+        let sec; 
+        let pos = true;       
+
+        for(let i = 1; i <= 3; i++) {
+            $(`.min${i}`).click(function() {
+                $('.clock').html(`0${i}:00`);
+                m = i;
+                pos = false;    
+                hideTimerBtns();            
+            });
+        }
+        $('.infinity').click(function() {
+            hideTimerBtns();
+            m = 0;
+        }); 
+        function hideTimerBtns() {
+            $('.timeBtn').css('visibility', 'hidden');
+            $('#myCanvasTime').hide();
+        }
         
-        function timer() {  
-            s++;  
+        function timer() { 
+            pos ? timerPos() : timerNeg();
+
+            s > 9 ? sec = s : sec = '0' + s; 
+            m > 9 ? min = m : min = '0' + m; 
+            
+            $('.clock').html(min + ':' + sec); 
+            m == 30 &&  clearInterval(timerReg); // stop timer
+        }
+        function timerNeg() {
+            if(s == 0 && s < 9) {               
+                m--;
+                s = 60;                
+            }
+            s--;  
+            (m == 0 && s == 0) &&  clearInterval(timerReg); 
+        }
+        function timerPos() {
+            s++; 
             if(s == 60) {
                 s = 0
                 m++;
-            }  
-            if(s > 9) {
-                sec = s;                
-            } else if(s <= 9){
-                sec = '0' + s;                              
             } 
-            if(m > 9) {
-                min = m; 
-            } else if(m <= 9) {
-                min = '0' + m; 
-            }
-            $('.clock').text(min + ':' + sec);  
         }
 
 });
