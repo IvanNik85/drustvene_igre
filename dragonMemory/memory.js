@@ -167,7 +167,7 @@ $(document).ready(function() {
             ctx.stroke();             
         }    
         
-        let called1 = false;  //reset timer values when clicking multiple times or when going back and changing
+        let called1 = false;  //reset timer values when clicking multiple times or when going back and changing (Igra ce se resetovati. Da li zelite da nastavite?)
         $('.timer').click(function(){      //alert when chosing different level or change timer       
             $('.timeBtn').css('visibility', 'hidden');         //endgame - win or lose
             if(called1) {            
@@ -247,7 +247,8 @@ $(document).ready(function() {
             $('.main').append('<button class="menuBtn backBtn"><i class="fa fa-angle-double-left"></i></button>')
             $('.mainMenu').show();
             $('.wrapper').hide(); 
-            hide(document.querySelector('.one'));            
+            hide(document.querySelector('.one')); 
+            hideTimerBtns();           
             $('.backBtn').on('click', hideMenu); 
             clearInterval(timerReg);
             $('.backBtn').click(function() {
@@ -262,6 +263,9 @@ $(document).ready(function() {
             $('.mainMenu').hide();
             $('.wrapper').show(); 
         }  
+        function hideTime() {
+            
+        }
        
         let s = 0;
         let m = 0;
@@ -310,6 +314,40 @@ $(document).ready(function() {
                 m++;
             } 
         }
+        let menuBtn = true;
+        $(window).resize(() => {                 
+            $(this).width() < 975 ?                
+                $('.menuBtns').slideUp() :    
+                $('.menuBtns').slideDown(); 
+
+            if($('.menuBtns').is(":visible")) {
+                $('#slideOptions').css('transform', 'rotate(0deg)');
+                menuBtn = true;
+            } 
+        })
+       
+        $('#slideOptions').click(function(){
+            $('.menuBtns').slideToggle();  
+            rotateBtn(this);          
+        });
+
+        function rotateBtn(a) {
+            if(menuBtn) {
+                $(a).css('transform', 'rotate(180deg)');
+                menuBtn = false;
+            } else {
+                $(a).css('transform', 'rotate(0deg)')
+                menuBtn = true;
+            }
+        }
+
+        $('.highscores').click(function() {
+            for(let i = 1; i <= 10; i++) {
+                $('.listHighscores').append(`<p>${i}. Marko - attempts: 10, time: 03:12</p>`) 
+            }
+            $('.listHighscores').show();
+            console.log(`da`)
+        });
 
 });
     

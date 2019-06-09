@@ -16,10 +16,11 @@
         <div class="menuWrap">
             <div class="container">
                 <div class="row">                
-                    <div class="col-md-8 offset-md-2 main"> 
+                    <div class="col-lg-9 mx-auto col-xl-8 offset-xl-2 main"> 
+                        <div class="listHighscores"></div>
                         <div class="wrap">                           
                             <h1>Dragon memory</h1>       
-                           <div class="menuButtons">
+                            <div class="menuButtons">
                                 <button class="menuBtn highscores">Highscores</button>                    
                                 <button type="button" class="menuBtn cardBack" data-toggle="modal" data-target="#myModal">Card Style</button>
                                 <button class="menuBtn timer">Timer</button> 
@@ -29,7 +30,7 @@
                                 <button class="timeBtn min3">3 min</button>
                                 <button class="timeBtn infinity">&#8734</button>
                                 <canvas id="myCanvasTime" width="400" height="80"></canvas>   
-                           </div>                                                      
+                            </div>                                                      
                             <canvas id="myCanvas" width="400" height="80"></canvas>                          
                             <div class="btnDiv">
                                 <button class="menuBtn one">Easy</button>
@@ -65,14 +66,19 @@
         <div class="wrapImg">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 menu">
-                        <h1>Dragon Memory</h1>
-                        <button id="newGame">New Game</button>
-                        <button id="options">Options</button>
-                        <div id="attempts"><span>Attempts:</span><span id="num">0</span></div>
-                        <div class="clock">00:00</div>
+                    <div class="col-lg-3 menu">
+                        <div class='menuBtns'>
+                            <h1>Dragon Memory</h1>
+                            <button id="newGame">New Game</button>
+                            <button id="options">Options</button>
+                        </div>
+                        <div class="statistic">
+                            <div id="attempts"><span>Attempts:</span><span id="num">0</span></div>
+                            <div class="clock">00:00</div>
+                            <button id="slideOptions"><i class="fas fa-angle-down"></i></button>
+                        </div>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-lg-9">
                         <div class="memoryGame">
                                                
                         </div>
