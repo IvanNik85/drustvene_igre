@@ -2,6 +2,8 @@ $(document).ready(function() {
     let cardStyle;
     let dificulty;
     let timerReg;
+    let size = 10; 
+    let pos = true; 
     for(let i = 0; i < 12; i++) {
         $('.modal-content').prepend(`<img src="./images/card${i}.png" alt="card${i}" id="card${i}" data-dismiss="modal">`);       
     } 
@@ -26,8 +28,18 @@ $(document).ready(function() {
         par.parentElement.style.visibility = 'hidden'; 
     }
 
-    $('.start').click(function() {  
-        timerReg = setInterval(timer, 1000);
+    $('.start').click(start);
+    function start() {  
+        $('#num').text(0); 
+        s = 0;  
+        if(pos){
+            $('.clock').html(`00:00`)
+        } else {
+            m = resetTime; 
+            $('.clock').html(`0${m}:00`);
+        } 
+        clearInterval(timerReg); 
+        timerReg = setInterval(timer, 1000);               
         switch(dificulty) {
             case 8:
                 dificultyLevel(8, cardStyle || 'card1'); 
@@ -51,10 +63,11 @@ $(document).ready(function() {
         }
         $('.wrapper').show();
         $('.mainMenu').hide();   
-    });
+    }
 
     function dificultyLevel(num, back) {
         $('.memoryGame').empty();
+        $('.memoryGame').append('<div id="overlay"><h1 id="winLose"></h1></div>')
         for(i = 0; i < 2; i++) {
             for(j = 1; j <= num; j++) {                             
                 $('.memoryGame').append(`<div class="card" data-name="dragon${j}">
@@ -83,9 +96,11 @@ $(document).ready(function() {
         let hasFlipped = false;
         let firstCard, secondCard;
         let lockBoard = false;
-        let count = 0;
+        let countPair = 0;
+        let count = 0; 
+        let cardsNumber = document.querySelectorAll('.card').length;
 
-        function flip() {       
+        function flip() {  
             if(lockBoard) return;
             if(this == firstCard) return;
             this.classList.add('flip');    
@@ -99,6 +114,7 @@ $(document).ready(function() {
                 if(firstCard.dataset.name == secondCard.dataset.name) {
                     firstCard.removeEventListener('click', flip);
                     secondCard.removeEventListener('click', flip);
+                    countPair += 2;
                 } else {       
                     lockBoard = true;      
                     setTimeout(function() {
@@ -108,12 +124,35 @@ $(document).ready(function() {
                         firstCard = null;
                     }, 1000);              
                 }             
-            }        
-        }   
+            }  
+            // Win condition and display message
+            if(cardsNumber == countPair) { 
+                winLose('You Win', '#15ab20');
+            } 
+        }  
     }  
+
+    function winLose(message, colorWL) {               
+        let interval = setInterval(animate, 10);
+        $('#overlay').css({
+            'z-index': 1,
+            'background-color': 'rgba(0, 0, 0, 0.7)'
+        });
+        function animate() {
+            size++;
+            if(size == 150) {
+                return clearInterval(interval);
+            } 
+            $('#winLose').html(message).css({
+                fontSize: size + 'px',
+                color: colorWL
+            })                                   
+        }  
+        clearInterval(timerReg);
+    }            
     
     $('#newGame').click(function(){ 
-        location.reload();        
+        start(); 
     })    
 
     let c = document.getElementById("myCanvas");
@@ -168,10 +207,10 @@ $(document).ready(function() {
         }    
         
         let called1 = false;  //reset timer values when clicking multiple times or when going back and changing (Igra ce se resetovati. Da li zelite da nastavite?)
-        $('.timer').click(function(){      //alert when chosing different level or change timer       
-            $('.timeBtn').css('visibility', 'hidden');         //endgame - win or lose
-            if(called1) {            
-                resetTimeCanvas(); 
+        $('.timer').click(function(){      //alert when chosing different level or change timer      
+            $('.timeBtn').css('visibility', 'hidden');        //back button correct timers
+            if(called1) {                                     // randomise cards
+                resetTimeCanvas();                              
                 setTimeout(function() {
                     $('.timeBtn').css('visibility', 'visible'); 
                 },600)                                 
@@ -244,16 +283,18 @@ $(document).ready(function() {
         }
         
         $('#options').click(function() {             
-            $('.main').append('<button class="menuBtn backBtn"><i class="fa fa-angle-double-left"></i></button>')
+            $('.backBtn').show();
             $('.mainMenu').show();
             $('.wrapper').hide(); 
             hide(document.querySelector('.one')); 
             hideTimerBtns();           
             $('.backBtn').on('click', hideMenu); 
             clearInterval(timerReg);
-            $('.backBtn').click(function() {
-                timerReg = setInterval(timer, 1000);
-            });
+        });
+        $('.backBtn').click(function() {
+            if($('.clock').html() != `00:00` || pos){ 
+                timerReg = setInterval(timer, 1000); 
+            }   
         });
         function hideMenu() {
             if(cardStyle) {
@@ -262,52 +303,53 @@ $(document).ready(function() {
             }               
             $('.mainMenu').hide();
             $('.wrapper').show(); 
-        }  
-        function hideTime() {
-            
-        }
+        }        
        
         let s = 0;
         let m = 0;
         let min;
         let sec; 
-        let pos = true;       
+        let resetTime = 0;
 
         for(let i = 1; i <= 3; i++) {
             $(`.min${i}`).click(function() {
                 $('.clock').html(`0${i}:00`);
-                m = i;
+                m, resetTime = i;                
                 pos = false;    
                 hideTimerBtns();            
             });
         }
         $('.infinity').click(function() {
-            hideTimerBtns();
+            hideTimerBtns();  
             m = 0;
+            pos = true;           
         }); 
         function hideTimerBtns() {
             $('.timeBtn').css('visibility', 'hidden');
             $('#myCanvasTime').hide();
         }
         
-        function timer() { 
-            pos ? timerPos() : timerNeg();
+        function timer() {
+            pos ? timerPos() : timerNeg(); 
 
             s > 9 ? sec = s : sec = '0' + s; 
             m > 9 ? min = m : min = '0' + m; 
             
             $('.clock').html(min + ':' + sec); 
-            m == 30 &&  clearInterval(timerReg); // stop timer
+            m == 30 && clearInterval(timerReg); // stop timer
         }
-        function timerNeg() {
+        function timerNeg() {            
             if(s == 0 && s < 9) {               
                 m--;
                 s = 60;                
             }
             s--;  
-            (m == 0 && s == 0) &&  clearInterval(timerReg); 
+
+            if($('.clock').html() == `00:01`){ 
+                winLose('You Lose', '#bb2727');
+            }            
         }
-        function timerPos() {
+        function timerPos() {            
             s++; 
             if(s == 60) {
                 s = 0

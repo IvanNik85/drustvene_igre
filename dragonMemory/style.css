@@ -108,6 +108,7 @@
     position: absolute;
     bottom: 15px;
     left: 15px; 
+    display: none;
 }
 #myCanvas {
     display: block;
@@ -156,6 +157,27 @@
     flex-flow: row wrap;
     perspective: 1000px;
 }
+#overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.memoryGame #winLose {
+    position: absolute;
+    color: #fff;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    font-size: 0px;
+    /* color: #bbb027; */
+    /* color: #bb2727; */
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    font-family: winLose;
+}
 /* 16.666%  for 36
     20%  for 25*/
 .memoryGame .card {
@@ -200,6 +222,10 @@
 @font-face {
     font-family: digitalClock;
     src: url(./font/digitalClock.ttf);
+}
+@font-face {
+    font-family: winLose;
+    src: url(./font/FrozenNeutra.otf)
 }
 .menu {
     border: 2px solid #fad232;    
