@@ -1,69 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Društvene igre</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/drustveneIgre.css">    
+    <link rel="stylesheet" type="text/css" href="./drustvene_igre_files/css/drustveneIgre.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap//dist/css/bootstrap.min.css">
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
 </head>
+
 <body>
     <div class='container'>
-        <div class='imageDiv'>        
-        </div>
-    </div>
-    <div class='containerGames'>
-        <div id='divOne' class='games'>
-            <button class='visible' id="vesala" type="button">Vešala</button>
-        </div>
-        <div id='divTwo' class='games'>
-            <a href="skocko/skocko.html"><button class='visible' id="skocko" type="button">Skočko</button></a>
-        </div>
-        <div id='divThree' class='games'>
-                <a href="dragonMemory/index.html"><button class='visible' id="slova" type="button">Dragon memory</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="imageDiv">
+                    <img src="./drustvene_igre_files/images/gameTime.jpg" alt="">
+                </div>
+            </div>
         </div>       
-    </div>   
-    <div div class='wrap'>
-        <div class='generated'>
-        </div>
-    </div>
     
-    <script> 
-        var vesala = document.getElementById('vesala');
-        var generated = document.querySelector('.generated');
-        var link = document.createElement('a');
-        var link1 = document.createElement('a');
-        link.setAttribute('href', 'vesala/Igra_vesala.html');
-        link1.setAttribute('href', 'vesala/Igra_vesala_hard.html');
-        var btnOne = document.createElement('button');           
-        btnOne.setAttribute('id', 'easy');           
-        btnOne.innerHTML = 'Lakše';
-        var btnTwo = document.createElement('button');           
-        btnTwo.setAttribute('id', 'hard');
-        btnTwo.innerHTML = 'Teže';
+        <div class='containerGames'>
+            <div id='divOne' class='games'>
+                <button class='visible' id="vesala" type="button">Vešala</button>
+                <div class='generated'>
+                    </div>
+            </div>
+            <div id='divTwo' class='games'>
+                <a href="skocko/skocko.html"><button class='visible' id="skocko" type="button">Skočko</button></a>
+            </div>
+            <div id='divThree' class='games'>
+                <a href="dragonMemory/index.html"><button class='visible' id="dragon" type="button">Dragon memory</button>
+            </div>
+        </div>
+        
+    </div>
 
-        vesala.addEventListener('mouseenter', generate); 
-        vesala.addEventListener('mouseleave', remove);
-
-        function generate() {           
-
-            setTimeout(() => {  
-
-                btnOne.className = '';
-                btnTwo.className = '';
-                generated.appendChild(link);     
-                link.appendChild(btnOne);                           
-                generated.appendChild(link1);
-                link1.appendChild(btnTwo);
-            }, 130);
-        };
-        function remove() {
-            setTimeout(() => {
-                btnOne.className = 'hidden';
-                btnTwo.className = 'hidden';
-            },3000);
-        };
-
-    </script>
+    <script src="./drustvene_igre_files/js/drustvene_igre.js"></script>
 </body>
+
 </html>

@@ -4,6 +4,7 @@ $(document).ready(function() {
     let timerReg;
     let size = 10; 
     let pos = true; 
+    let resetTime = 0;
     for(let i = 0; i < 12; i++) {
         $('.modal-content').prepend(`<img src="./images/card${i}.png" alt="card${i}" id="card${i}" data-dismiss="modal">`);       
     } 
@@ -32,8 +33,9 @@ $(document).ready(function() {
     function start() {  
         $('#num').text(0); 
         s = 0;  
-        if(pos){
-            $('.clock').html(`00:00`)
+        if(pos){  //srediti uslov za m = 1,2,3..
+            m = 0;
+            $('.clock').html(`0${m}:00`);
         } else {
             m = resetTime; 
             $('.clock').html(`0${m}:00`);
@@ -309,7 +311,6 @@ $(document).ready(function() {
         let m = 0;
         let min;
         let sec; 
-        let resetTime = 0;
 
         for(let i = 1; i <= 3; i++) {
             $(`.min${i}`).click(function() {
@@ -321,7 +322,7 @@ $(document).ready(function() {
         }
         $('.infinity').click(function() {
             hideTimerBtns();  
-            m = 0;
+            m, resetTime = 0;
             pos = true;           
         }); 
         function hideTimerBtns() {
@@ -383,13 +384,13 @@ $(document).ready(function() {
             }
         }
 
-        $('.highscores').click(function() {
-            for(let i = 1; i <= 10; i++) {
-                $('.listHighscores').append(`<p>${i}. Marko - attempts: 10, time: 03:12</p>`) 
-            }
-            $('.listHighscores').show();
-            console.log(`da`)
-        });
+        // $('.highscores').click(function() {
+        //     for(let i = 1; i <= 10; i++) {
+        //         $('.listHighscores').append(`<p>${i}. Marko - attempts: 10, time: 03:12</p>`) 
+        //     }
+        //     $('.listHighscores').show();
+        //     console.log(`da`)
+        // });
 
 });
     
