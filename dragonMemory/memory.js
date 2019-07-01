@@ -2,9 +2,15 @@ $(document).ready(function() {
     let cardStyle;
     let dificulty;
     let timerReg;
+    let changeTimer = []; 
+    let changedTmr = false;   
     let size = 10; 
     let pos = true; 
     let resetTime = 0;
+    let s = 0;
+    let m = 0;
+    let min;
+    let sec; 
     for(let i = 0; i < 12; i++) {
         $('.modal-content').prepend(`<img src="./images/card${i}.png" alt="card${i}" id="card${i}" data-dismiss="modal">`);       
     } 
@@ -31,17 +37,9 @@ $(document).ready(function() {
 
     $('.start').click(start);
     function start() {  
+        size = 10;
         $('#num').text(0); 
-        s = 0;  
-        if(pos){  //srediti uslov za m = 1,2,3..
-            m = 0;
-            $('.clock').html(`0${m}:00`);
-        } else {
-            m = resetTime; 
-            $('.clock').html(`0${m}:00`);
-        } 
-        clearInterval(timerReg); 
-        timerReg = setInterval(timer, 1000);               
+        resetTimer();       
         switch(dificulty) {
             case 8:
                 dificultyLevel(8, cardStyle || 'card1'); 
@@ -283,7 +281,51 @@ $(document).ready(function() {
             z = 200;
             q = 40;
         }
-        
+
+        function resetTimer() {
+            s = 0;  
+            if(pos){  
+                m = 0;
+                $('.clock').html(`0${m}:00`);
+            } else {
+                m = resetTime; 
+                $('.clock').html(`0${m}:00`);
+            } 
+            clearInterval(timerReg); 
+            timerReg = setInterval(timer, 1000); 
+        }
+
+        for(let i = 1; i <= 3; i++) {
+            $(`.min${i}`).click(function() {
+                if(changedTmr == false) {
+                    $('.clock').html(`0${i}:00`);
+                }               
+                m, resetTime = i;                
+                pos = false;    
+                hideTimerBtns(); 
+                changedTmr = false;                      
+                changedTimer(this);    
+            });
+        }
+
+        $('.infinity').click(function() {
+            hideTimerBtns();  
+            m, resetTime = 0;
+            pos = true;  
+            changedTmr = false;    
+            changedTimer(this); 
+        }); 
+
+        function changedTimer(self) {   
+            changeTimer.push(self.innerHTML)                
+            if(changeTimer.length == 2){
+                if(changeTimer[0] != changeTimer[1]) {
+                    changedTmr = true;
+                } 
+                changeTimer.shift();
+            }                             
+        }
+
         $('#options').click(function() {             
             $('.backBtn').show();
             $('.mainMenu').show();
@@ -293,11 +335,16 @@ $(document).ready(function() {
             $('.backBtn').on('click', hideMenu); 
             clearInterval(timerReg);
         });
-        $('.backBtn').click(function() {
-            if($('.clock').html() != `00:00` || pos){ 
-                timerReg = setInterval(timer, 1000); 
-            }   
+
+        $('.backBtn').click(function() {          
+            if(changedTmr == true) {
+                resetTimer();                 
+            } else if($('.clock').html() != `00:00` || pos) {
+                size == 10 && (timerReg = setInterval(timer, 1000));                     
+            }    
+            changedTmr = false;   
         });
+        
         function hideMenu() {
             if(cardStyle) {
                 let back = document.querySelectorAll('.back');
@@ -306,25 +353,7 @@ $(document).ready(function() {
             $('.mainMenu').hide();
             $('.wrapper').show(); 
         }        
-       
-        let s = 0;
-        let m = 0;
-        let min;
-        let sec; 
-
-        for(let i = 1; i <= 3; i++) {
-            $(`.min${i}`).click(function() {
-                $('.clock').html(`0${i}:00`);
-                m, resetTime = i;                
-                pos = false;    
-                hideTimerBtns();            
-            });
-        }
-        $('.infinity').click(function() {
-            hideTimerBtns();  
-            m, resetTime = 0;
-            pos = true;           
-        }); 
+        
         function hideTimerBtns() {
             $('.timeBtn').css('visibility', 'hidden');
             $('#myCanvasTime').hide();

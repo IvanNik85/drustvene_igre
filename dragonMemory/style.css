@@ -130,7 +130,7 @@
     background-color:rgba(224, 21, 49, 0.7);
     display: block;
     margin: auto;
-    border: transparent;
+    border: 1px splid black;
 }
 .cardBack, .highscores, .timer{
     position: relative;
@@ -181,8 +181,8 @@
 /* 16.666%  for 36
     20%  for 25*/
 .memoryGame .card {
-    width: calc(25% - 6px);
-    height: calc(25% - 6px);
+    width: calc(25% - 0.375em);
+    height: calc(25% - 0.375em);
     position: relative;
     margin: 3px;   
     transform-style: preserve-3d;
@@ -191,8 +191,8 @@
     border: none;
 }
 .card1 {
-    width: calc(20% - 6px);
-    height: calc(20% - 6px);
+    width: calc(20% - 0.375em);
+    height: calc(20% - 0.375em);
     background: url('images/lastCard1.png') no-repeat center;
     background-size: cover;
     margin: 3px; 

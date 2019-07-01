@@ -36,6 +36,7 @@ function remove() {
 let ds = document.querySelectorAll('.games')
 
 $(document).ready(function () {
+    let locked;
 
     let ids = ['#vesala', '#skocko', '#dragon'];
     let iconClass = ['dizzy', 'star-half-alt', 'dragon'];
@@ -43,12 +44,15 @@ $(document).ready(function () {
     let names = ['Vešala', 'Skočko', 'Dragon memory'];
 
     for (let i = 0; i < 3; i++) {
+        if(locked) return;
         $(ids[i]).mouseenter(function () {
             $(this).html(`<i class="fas fa-${iconClass[i]}">`).addClass('hovered');
         })
         $(divs[i]).mouseleave(function () {
+            locked = true;
             setTimeout(function () {
                 $(ids[i]).html(names[i]);
+                locked = false;
             }, 1500)
             setTimeout(function () {
                 $(ids[i]).removeClass('hovered');
