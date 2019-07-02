@@ -4,6 +4,8 @@ $(document).ready(function() {
     let timerReg;
     let changeTimer = []; 
     let changedTmr = false;   
+    let dragons = [];
+    let randomDragon = []; 
     let size = 10; 
     let pos = true; 
     let resetTime = 0;
@@ -37,6 +39,7 @@ $(document).ready(function() {
 
     $('.start').click(start);
     function start() {  
+        randomiseDragons();
         size = 10;
         $('#num').text(0); 
         resetTimer();       
@@ -64,14 +67,28 @@ $(document).ready(function() {
         $('.wrapper').show();
         $('.mainMenu').hide();   
     }
+     
+    function randomiseDragons() {
+        randomDragon = [];
+        for(let i=1; i<=41; i++) {
+            dragons.push(`dragon${i}`)
+        } 
+        while(dragons.length > 0) {
+            let rand = Math.floor(Math.random() * dragons.length);
+            randomDragon.push(dragons[rand]);
+            dragons.splice(rand, 1)
+        }
+    }    
 
     function dificultyLevel(num, back) {
+        console.log(dragons);
+        console.log(randomDragon);
         $('.memoryGame').empty();
         $('.memoryGame').append('<div id="overlay"><h1 id="winLose"></h1></div>')
         for(i = 0; i < 2; i++) {
             for(j = 1; j <= num; j++) {                             
-                $('.memoryGame').append(`<div class="card" data-name="dragon${j}">
-                <img class="front" src="images/dragon${j}.jpg" alt="dragon${j}">
+                $('.memoryGame').append(`<div class="card" data-name="dragon${randomDragon[j]}">
+                <img class="front" src="images/${randomDragon[j]}.jpg" alt="dragon${randomDragon[j]}">
                 <img class="back" src="images/${back}.png" alt="cardBack"> 
                 </div>`);
             }            
@@ -86,7 +103,7 @@ $(document).ready(function() {
         })(); 
 
         if(num == 12 && j < 14) { 
-            $('.memoryGame').append(`<div class="card1"<img src="images/dragon25.jpg" alt="neutral"></div>`);
+            $('.memoryGame').append(`<div class="card1"<img src="images/dragon40.jpg" alt="neutral"></div>`);
             $('.card1').css('order', 16);
         }  
  
@@ -206,10 +223,10 @@ $(document).ready(function() {
             ctx.stroke();             
         }    
         
-        let called1 = false;  //reset timer values when clicking multiple times or when going back and changing (Igra ce se resetovati. Da li zelite da nastavite?)
-        $('.timer').click(function(){      //alert when chosing different level or change timer      
-            $('.timeBtn').css('visibility', 'hidden');        //back button correct timers
-            if(called1) {                                     // randomise cards
+        let called1 = false;      // randomise cards
+        $('.timer').click(function(){         
+            $('.timeBtn').css('visibility', 'hidden');       
+            if(called1) {                                     
                 resetTimeCanvas();                              
                 setTimeout(function() {
                     $('.timeBtn').css('visibility', 'visible'); 

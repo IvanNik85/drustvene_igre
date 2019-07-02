@@ -324,11 +324,6 @@
         display: none;
     }
 }
-@media (max-width: 768px) { 
-    .memoryGame {
-        height: 510px;
-    }
-}
 @media (max-width: 1200px) {
     .min1 {
         bottom: 75px;
@@ -345,5 +340,22 @@
     .infinity {
         bottom: 15px;
         left: 532px;
+    }
+}
+@media (max-width: 768px) { 
+    .memoryGame {
+        height: 510px;
+    }
+    .min1 {      
+        left: 33px;
+    }
+    .min2 {     
+        left: 33px;
+    }
+    .min3 {      
+        left: 442px;
+    }
+    .infinity {      
+        left: 442px;
     }
 }
