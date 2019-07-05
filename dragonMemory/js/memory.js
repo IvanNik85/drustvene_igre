@@ -6,6 +6,8 @@ $(document).ready(function() {
     let changedTmr = false;   
     let dragons = [];
     let randomDragon = []; 
+    let playerName;
+    let rank = [];
     let size = 10; 
     let pos = true; 
     let resetTime = 0;
@@ -38,7 +40,7 @@ $(document).ready(function() {
     }
 
     $('.start').click(start);
-    function start() {  
+    function start() { 
         randomiseDragons();
         size = 10;
         $('#num').text(0); 
@@ -63,6 +65,7 @@ $(document).ready(function() {
                 break; 
             default:
                 dificultyLevel(8, cardStyle || 'card1');
+                changeTimer = ['∞'];
         }
         $('.wrapper').show();
         $('.mainMenu').hide();   
@@ -70,14 +73,14 @@ $(document).ready(function() {
      
     function randomiseDragons() {
         randomDragon = [];
-        for(let i=1; i<=41; i++) {
+        for(let i=1; i<=50; i++) {
             dragons.push(`dragon${i}`)
         } 
         while(dragons.length > 0) {
             let rand = Math.floor(Math.random() * dragons.length);
             randomDragon.push(dragons[rand]);
             dragons.splice(rand, 1)
-        }
+        }        
     }    
 
     function dificultyLevel(num, back) {
@@ -177,7 +180,8 @@ $(document).ready(function() {
     ctx.strokeStyle = '#fad232';
     ctx.lineWidth = 2.5;
     let called = false;
-    $('.difficulty').click(function(){         
+    $('.difficulty').click(function(){    
+        $('#myCanvas').show();     
         $('.btnDiv').css('visibility', 'hidden');         
         if(called) {            
             reset(); 
@@ -223,16 +227,17 @@ $(document).ready(function() {
             ctx.stroke();             
         }    
         
-        let called1 = false;      // randomise cards
-        $('.timer').click(function(){         
+        let called1 = false;     
+        $('.timer').click(function(){ 
             $('.timeBtn').css('visibility', 'hidden');       
             if(called1) {                                     
                 resetTimeCanvas();                              
                 setTimeout(function() {
                     $('.timeBtn').css('visibility', 'visible'); 
                 },600)                                 
-            } else {
-                animateTime();
+            } else {  
+                resetTimeCanvas();               
+                animateTime();                
                 $('.timeBtn').css('visibility', 'visible'); 
                 called1 = true;             
             }        
@@ -330,7 +335,7 @@ $(document).ready(function() {
             m, resetTime = 0;
             pos = true;  
             changedTmr = false;    
-            changedTimer(this); 
+            changedTimer(this);            
         }); 
 
         function changedTimer(self) {   
@@ -347,8 +352,8 @@ $(document).ready(function() {
             $('.backBtn').show();
             $('.mainMenu').show();
             $('.wrapper').hide(); 
-            hide(document.querySelector('.one')); 
-            hideTimerBtns();           
+            $('#myCanvas').css({display: "block"}) && hide(document.querySelector('.one')); 
+            $('#myCanvasTime').css({display: "block"}) && hideTimerBtns();           
             $('.backBtn').on('click', hideMenu); 
             clearInterval(timerReg);
         });
@@ -430,14 +435,37 @@ $(document).ready(function() {
             }
         }
 
-        // $('.highscores').click(function() {
-        //     for(let i = 1; i <= 10; i++) {
-        //         $('.listHighscores').append(`<p>${i}. Marko - attempts: 10, time: 03:12</p>`) 
-        //     }
-        //     $('.listHighscores').show();
-        //     console.log(`da`)
-        // });
+        for(let i = 1; i <= 10; i++) {
+            $('.listHighscores').append(`<p>${i}.<span class="rank${i}">--- | | ---</span></p>`) //Marko - attempts: 10, time: 03:12
+        }
+        $('.highscores').click(function() {            
+            $('.listHighscores').addClass('active');           
+        });
+        $('.highscores').blur(function() {
+            $('.listHighscores').removeClass('active');
+        });
 
+        $(window).on('load', function() {
+            $('.playerSign').fadeIn(1000);
+        })  
+        $('#sign').click(function() {
+            playerName = $('#player').val();
+            localStorage.setItem('playerName', playerName);
+            $('.playerName').html(playerName);
+            if(playerName != '') {
+                $('.playerSign').fadeOut(500);
+            } else {
+                alert(`Molimo unesite neku vrednost`)
+            }
+            console.log(playerName)
+        }); 
+        $('#playerOne').click(function() {
+            playerName = 'Player1';
+            localStorage.setItem('playerName', playerName);
+            $('.playerName').html(playerName);
+            $('.playerSign').fadeOut(500);
+            console.log(playerName)
+        }); 
 });
     
 
