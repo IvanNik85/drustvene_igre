@@ -22,14 +22,22 @@
     background-color: rgba(0, 0, 0, 0.3);
     height: 100%;
 }
+#dragon {
+    position: absolute;
+    top:20%;
+    left: 25%;
+    max-width: 70%;   
+    /* margin: auto; */
+}
 .mainMenu .main {     
-    background: url(../images/preview.jpg) no-repeat center;
-    background-size: cover;
+    /* background: url(../images/preview.jpg) no-repeat center;
+    background-size: cover; */
+    background-color: rgb(19, 16, 31);
     width: 100%;
     height: 600px;
     position: relative;
     margin-top: 10%;
-    border: 5px solid black;  
+    border: 1px solid #ccb80b;  
     padding: 0;  
     margin-top: 114px;
 }
@@ -37,7 +45,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    padding-top: 30px;    
+    padding-top: 30px; 
 }
 /* modal style */
 #myModal {
@@ -67,12 +75,19 @@
     width: 140px;
     height: 40px;
     border-radius: 4px;
-    background-color: rgba(224, 21, 49, 0.7);
+    /* background-color: rgba(224, 21, 49, 0.7); */
+    background-color: rgba(27, 5, 8, 0.7);
     color: #fff;
     border: transparent;
     margin: 0 7px; 
     position: relative;
-    border: 2px solid black;
+    border: 2px solid #ffb03b;
+    transition: 'font-size' 0.075s;    
+}
+.menuBtn:hover {
+    background-color: rgba(95, 4, 42, 0.7);     
+    font-size: 18px;
+    transition: 0.2s;
 }
 .menuBtn:focus {
     outline: none;
@@ -83,9 +98,15 @@
     height: 55px;
     border-radius: 50%;
     color: #fff;
-    z-index: 5;
-    background-color: rgba(224, 21, 49, 0.7);
-    /* display: none; */
+    z-index: 2;
+    border: 2px solid rgb(145, 20, 68);   
+    background-color: rgba(27, 5, 8, 0.7);
+}
+.timeBtn:hover {
+    background-color: rgba(253, 222, 45, 0.7);
+    transition: 0.2s;
+    color: #000;
+    font-weight: bold;
 }
 .timeBtn:focus {
     outline: none;
@@ -100,11 +121,11 @@
 }
 .min3 {
     bottom: 75px;
-    left: 553px;
+    left: 555px;
 }
 .infinity {
     bottom: 15px;
-    left: 553px;
+    left: 555px;
 }
 .start {
     position: absolute;
@@ -120,7 +141,7 @@
 #myCanvas {
     display: block;
     margin: auto;
-    /* border: 1px solid #d3d3d3; */
+   position: relative;  
 }
 .menuButtons #myCanvasTime {   
     position: absolute;    
@@ -134,11 +155,14 @@
     position: relative;
     width: 140px;
     height: 40px;
-    background-color:rgba(224, 21, 49, 0.7);
+    background-color: rgba(27, 5, 8, 0.7);
     display: block;
     margin: auto;
     border: 1px splid black;
     z-index: 2;
+}
+.difficulty:hover {
+    background-color: rgba(95, 4, 42, 0.7); 
 }
 .cardBack, .highscores, .timer{
     position: relative;
@@ -159,7 +183,7 @@
     height: 100vh;
 }
 .memoryGame {
-    width: 100%;
+    width: 100%;    
     height: 825px;
     display: flex;
     flex-flow: row wrap;
@@ -168,7 +192,7 @@
 #overlay {
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: -1;
 }
 .memoryGame #winLose {
@@ -196,7 +220,12 @@
     background-color: transparent; 
     border: none;
 }
-.card1 {
+/* .card img {
+    width: 100%;
+    height: 100%;  
+    object-fit: cover;    
+} */
+/* .card1 {
     width: calc(20% - 0.375em);
     height: calc(20% - 0.375em);
     background: url('../images/lastCard1.png') no-repeat center;
@@ -206,14 +235,14 @@
 .card1 img {
     width: 100%;
     height: 100%;
-}
+} */
 .card.flip {
     transform: rotateY(180deg);    
     transition: .5s;
 }
 .front, .back {
     width: 100%;
-    height: auto;
+    /* height: auto; */
     position: absolute;    
     backface-visibility: hidden; 
     border-radius: 5px;     
@@ -222,7 +251,7 @@
     transform: rotateY(180deg);
 }
 .playerSign {    
-    position: relative;
+    position: absolute;
     display: flex;
     flex-flow: column wrap;
     align-content: center;    
@@ -235,14 +264,14 @@
     padding-top: 40px;
     color: #fff;
     font-size: 18px;
-    top: -300px;
-    left: 170px;
+    top: 25%;
+    left: 24%;
     z-index: 40; 
     display: none;  
 }
 .playerSign img {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
 }
 .playerSign button {   
     display: block;
@@ -250,6 +279,10 @@
     height: 35px;
     margin: auto;
     border-radius: 5px;
+}
+.playerSign i {
+    padding: 0 20px;
+    font-size: 12px;
 }
 .leftD {
     position: absolute;
@@ -266,6 +299,8 @@
 }
 #player {
     margin-bottom: 5px;
+    padding-left: 8px;
+    width: 190px;
 }
 .playerName {
     color: #fff;
@@ -277,6 +312,17 @@
 }
 #sign {
     margin-bottom: 30px;
+}
+.swal2-show {
+    position: relative;
+    top: -35px;
+}
+.swal2-icon.swal2-warning {
+    border-color: #efcd52 !important;
+    color: #efcd52 !important;
+}
+.swal2-styled.swal2-confirm {
+    background-color: #c01414 !important;
 }
 @font-face {
     font-family: memoryFont;
@@ -320,8 +366,13 @@
     border:2px solid black;
     color: #fff;
     border-radius: 3px;
+    transition: 0.2s;   
 }
-#newGame:active {
+#options:hover i {
+    font-weight: bold;
+    transition: all 0.2s;    
+}
+#newGame:active, #options:active {
     transform: scale(.97);
     transition: .1s;
 }
@@ -426,7 +477,7 @@
 }
 @media (max-width: 768px) { 
     .memoryGame {
-        height: 510px;
+        max-height: 510px;
     }
     .min1 {      
         left: 33px;
@@ -439,5 +490,8 @@
     }
     .infinity {      
         left: 442px;
+    }
+    #dragon {
+        left: 15%;
     }
 }

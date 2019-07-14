@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
@@ -19,7 +20,8 @@
                     <div class="col-lg-9 mx-auto col-xl-8 offset-xl-2 main"> 
                         <button class="menuBtn backBtn"><i class="fa fa-angle-double-left"></i></button>
                         <div class="listHighscores"></div>
-                        <div class="wrap">                           
+                        <div class="wrap">    
+                            <img id="dragon" src="./images/dragon-logo445.png" alt="dragon-logo44.png">                           
                             <h1>Dragon memory</h1>       
                             <div class="menuButtons">
                                 <button class="menuBtn highscores">Highscores</button>                    
@@ -39,12 +41,12 @@
                                 <button class="menuBtn three">Hard</button>                           
                             </div> 
                             <div class="playerSign">
-                                <img src="images/dragonLogoP.png" class="leftD" alt="dragonLogoP">
-                                <img src="images/dragonLogoP.png" class="rightD" alt="dragonLogoP">
-                                <p>Player name</p>
-                                <input type="text" id="player">
+                                <img src="images/lastCard1.png" class="leftD" alt="dragonLogoP">
+                                <img src="images/lastCard1.png" class="rightD" alt="dragonLogoP">
+                                <p><i class="far fa-dot-circle"></i>Player name<i class="far fa-dot-circle"></i></p>
+                                <input type="text" id="player" placeholder="Enter name or nick"> 
                                 <button type="button" id="sign">Sign in</button>
-                                <p>Play as Guest</p>
+                                <p><i class="far fa-dot-circle"></i>Play as Guest<i class="far fa-dot-circle"></i></p>
                                 <button type="button" id="playerOne">Player1</button>
                             </div>
                             <div class="startBtn"><button class="menuBtn start">Start</button></div>
@@ -80,7 +82,9 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="memoryGame">
-                                               
+                               <div class="row mem">
+
+                               </div>                
                         </div>
                     </div>
                 </div>
